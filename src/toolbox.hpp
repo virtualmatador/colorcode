@@ -10,7 +10,7 @@ namespace toolbox
         parser >> value;
         if (parser.fail())
             throw "";
-        if (value < begin || value > end)
+        if (value < begin || !(value < end))
             throw "";
     };
 

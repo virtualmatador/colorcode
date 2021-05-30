@@ -18,11 +18,21 @@ main::Game::Game()
             std::ostringstream js;
             for (std::size_t i = 0; i < 4; ++i)
             {
-                js.str("");
-                js.clear();
-                js << "clearTargetColor(" << i << ");";
-                bridge::CallFunction(js.str().c_str());
-                js.str("");
+                if (data_.target_colors_[i] < Data::target_colors_max_)
+                {
+                    js.clear();
+                    js << "setTargetColor(" << i << ","
+                        << data_.target_colors_[i] << ");";
+                    bridge::CallFunction(js.str().c_str());
+                    js.str("");
+                }
+                else
+                {
+                    js.str("");
+                    js.clear();
+                    js << "clearTargetColor(" << i << ");";
+                    bridge::CallFunction(js.str().c_str());
+                }
             }
             js.str("");
             js.clear();
@@ -37,6 +47,7 @@ main::Game::Game()
         else if (std::strcmp(command, "click") == 0)
         {
             std::size_t color = std::stoul(info);
+            data_.target_colors_[data_.active_target_] = color;
             std::ostringstream js;
             js.str("");
             js.clear();
@@ -51,9 +62,10 @@ main::Game::Game()
             return;
         else if (std::strcmp(command, "click") == 0)
         {
-            std::size_t active_target = std::stoul(info);
+            int active_target = std::stoul(info);
             if (data_.active_target_ == active_target)
             {
+                data_.target_colors_[data_.active_target_] = Data::target_colors_max_;
                 std::ostringstream js;
                 js.str("");
                 js.clear();

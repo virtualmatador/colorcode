@@ -10,6 +10,7 @@ namespace main
     class Data
     {
         static const int targets_max_ = 4;
+        static const int target_colors_max_ = 6;
         friend class Menu;
         friend class Game;
     public:
@@ -21,6 +22,7 @@ namespace main
 
     private:
         int active_target_;
+        int target_colors_[targets_max_];
         bool sound_;
         std::random_device seeder_;
         std::default_random_engine random_;
