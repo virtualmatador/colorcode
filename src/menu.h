@@ -1,0 +1,21 @@
+#ifndef SRC_MENU_H
+#define SRC_MENU_H
+
+#include "../cross/core/src/stage.h"
+
+namespace main
+{
+    class Menu: public core::Stage
+    {
+    public:
+        Menu();
+        ~Menu();
+        void Escape() override;
+
+    private:
+        void Play();
+        void Reset();
+    };
+}
+
+#endif //SRC_MENU_H

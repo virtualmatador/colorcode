@@ -1,0 +1,94 @@
+#buckets > button
+{
+    width: 7em;
+}
+
+#targets > button
+{
+    width: 5em;
+}
+
+#targets > button[data-active]::after
+{
+    border: 2px solid black;
+    padding: 0px;
+}
+
+.colored::after
+{
+    content: "";
+    display: block;
+    height: 0.5em;
+    padding: 1px;
+    border: 1px solid black;
+}
+
+.colored[data-color="white"]::before
+{
+    content: "-";
+}
+
+.colored[data-color="white"]::after
+{
+    background-color: white;
+}
+
+.colored[data-color="yellow"]::before
+{
+    content: "Yellow";
+}
+
+.colored[data-color="yellow"]::after
+{
+    background-color: yellow;
+}
+
+.colored[data-color="orange"]::before
+{
+    content: "Orange";
+}
+
+.colored[data-color="orange"]::after
+{
+    background-color: orange;
+}
+
+.colored[data-color="red"]::before
+{
+    content: "Red";
+}
+
+.colored[data-color="red"]::after
+{
+    background-color: red;
+}
+
+.colored[data-color="green"]::before
+{
+    content: "Green";
+}
+
+.colored[data-color="green"]::after
+{
+    background-color: green;
+}
+
+.colored[data-color="blue"]::before
+{
+    content: "Blue";
+}
+
+.colored[data-color="blue"]::after
+{
+    background-color: blue;
+}
+
+.colored[data-color="brown"]::before
+{
+    content: "Brown";
+}
+
+.colored[data-color="brown"]::after
+{
+    background-color: brown;
+}
