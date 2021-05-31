@@ -9,9 +9,14 @@ namespace toolbox
         std::istringstream parser(bridge::GetPreference(key));
         parser >> value;
         if (parser.fail())
+        {
             throw "";
-        if (value < begin || !(value < end))
-            throw "";
+        }
+        if constexpr (!std::is_same<T, bool>::value)
+        {
+            if (value < begin || !(value < end))
+                throw "";
+        }
     };
 
     template<typename T>

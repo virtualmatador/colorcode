@@ -3,6 +3,8 @@
 
 #include "../cross/core/src/stage.h"
 
+#include "data.h"
+
 namespace main
 {
     class Game: public core::Stage
@@ -11,6 +13,10 @@ namespace main
         Game();
         ~Game();
         void Escape() override;
+
+    private:
+        void update_view();
+        void add_row(const Data::Row& row);
     };
 }
 

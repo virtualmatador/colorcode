@@ -15,11 +15,6 @@ main::Menu::Menu()
             return;
         else if (std::strcmp(command, "ready") == 0)
         {
-            std::ostringstream js;
-            js.str("");
-            js.clear();
-            js << "setSound(" << data_.sound_ << ")";
-            bridge::CallFunction(js.str().c_str());
         }
     };
     handlers_["play"] = [&](const char* command, const char* info)
@@ -28,27 +23,6 @@ main::Menu::Menu()
             return;
         else if (std::strcmp(command, "click") == 0)
             Play();
-    };
-    handlers_["reset"] = [&](const char* command, const char* info)
-    {
-        if (std::strlen(command) == 0)
-            return;
-        else if (std::strcmp(command, "click") == 0)
-            Reset();
-    };
-    handlers_["sound"] = [&](const char* command, const char* info)
-    {
-        if (std::strlen(command) == 0)
-            return;
-        else if (std::strcmp(command, "click") == 0)
-        {
-            if (std::strlen(info) == 0)
-                return;
-            else if (std::strcmp(info, "true") == 0)
-                data_.sound_ = true;
-            else if (std::strcmp(info, "false") == 0)
-                data_.sound_ = false;
-        }
     };
     bridge::LoadWebView(index_, (std::int32_t)core::VIEW_INFO::Default, "menu", "");
 }
@@ -65,11 +39,5 @@ void main::Menu::Escape()
 void main::Menu::Play()
 {
     progress_ = PROGRESS::GAME;
-    bridge::NeedRestart();
-}
-
-void main::Menu::Reset()
-{
-    data_.Reset();
     bridge::NeedRestart();
 }

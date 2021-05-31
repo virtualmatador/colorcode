@@ -14,7 +14,6 @@ namespace main
 
     private:
         void Play();
-        void Reset();
     };
 }
 

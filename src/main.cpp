@@ -29,12 +29,12 @@ void life_cycle::Destroy()
 
 void life_cycle::Start()
 {
-    main::data_.Load();
+    main::data_.load();
 }
 
 void life_cycle::Stop()
 {
-    main::data_.Save();
+    main::data_.save();
 }
 
 void life_cycle::Restart()

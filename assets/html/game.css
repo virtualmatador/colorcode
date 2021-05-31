@@ -1,94 +1,202 @@
+*
+{
+    user-select: none;
+}
+
+body > div
+{
+    text-align: center;
+}
+
+body > div > div
+{
+    display: inline-block;
+}
+
+.command
+{
+    width: 6em;
+}
+
 #buckets > button
 {
-    width: 7em;
+    width: 5em;
 }
+
 
 #targets > button
 {
     width: 5em;
 }
 
+#targets > button::after
+{
+    background-color: white;
+    border-radius: 4pt;
+    border: 1pt solid gray;
+    padding: 1pt;
+}
+
 #targets > button[data-active]::after
 {
-    border: 2px solid black;
-    padding: 0px;
+    border: 2pt solid black;
+    padding: 0pt;
+}
+
+.colored::before
+{
+    font-size: 6pt;
+    display: block;
 }
 
 .colored::after
 {
-    content: "";
+    font-size: 18pt;
     display: block;
-    height: 0.5em;
-    padding: 1px;
-    border: 1px solid black;
 }
 
 .colored[data-color="white"]::before
 {
-    content: "-";
+    content: "Empty";
 }
 
 .colored[data-color="white"]::after
 {
-    background-color: white;
+    content: "-";
+    color: white;
 }
 
-.colored[data-color="yellow"]::before
+.colored[data-color="gray"]::before
+{
+    content: "gray";
+}
+
+.colored[data-color="gray"]::after
+{
+    content: "\2605";
+    color: gray;
+}
+
+.colored[data-color="black"]::before
+{
+    content: "Black";
+}
+
+.colored[data-color="black"]::after
+{
+    content: "\2605";
+    color: black;
+}
+
+.colored[data-color="0"]::before
 {
     content: "Yellow";
 }
 
-.colored[data-color="yellow"]::after
+.colored[data-color="0"]::after
 {
-    background-color: yellow;
+    content: "\25B2";
+    color: gold;
 }
 
-.colored[data-color="orange"]::before
+.colored[data-color="1"]::before
 {
     content: "Orange";
 }
 
-.colored[data-color="orange"]::after
+.colored[data-color="1"]::after
 {
-    background-color: orange;
+    content: "\2B22";
+    color: darkorange;
 }
 
-.colored[data-color="red"]::before
+.colored[data-color="2"]::before
 {
     content: "Red";
 }
 
-.colored[data-color="red"]::after
+.colored[data-color="2"]::after
 {
-    background-color: red;
+    content: "\2665";
+    color: red;
 }
 
-.colored[data-color="green"]::before
+.colored[data-color="3"]::before
 {
     content: "Green";
 }
 
-.colored[data-color="green"]::after
+.colored[data-color="3"]::after
 {
-    background-color: green;
+    content: "\25FC";
+    color: green;
 }
 
-.colored[data-color="blue"]::before
+.colored[data-color="4"]::before
 {
     content: "Blue";
 }
 
-.colored[data-color="blue"]::after
+.colored[data-color="4"]::after
 {
-    background-color: blue;
+    content: "\25CF";
+    color: blue;
 }
 
-.colored[data-color="brown"]::before
+.colored[data-color="5"]::before
 {
     content: "Brown";
 }
 
-.colored[data-color="brown"]::after
+.colored[data-color="5"]::after
 {
-    background-color: brown;
+    content: "\25C6";
+    color: brown;
+}
+
+#rows:empty
+{
+    display: none;
+}
+
+#rows
+{
+    padding: 4pt;
+    margin: 2pt;
+    border-radius: 2pt;
+    border: 1pt solid black;
+}
+
+.row > div
+{
+    display: inline-block;
+}
+
+.cell > span
+{
+    width: 4em;
+    display: inline-block;
+    text-align: center;
+    background-color: white;
+    border: 1pt solid black;
+    border-radius: 4pt;
+    padding: 2pt;
+    margin: 2pt;
+}
+
+.score > span
+{
+    width: 2em;
+    display: inline-block;
+    text-align: center;
+    background-color: white;
+    border: 1pt solid black;
+    border-radius: 4pt;
+    padding: 2pt;
+    margin: 2pt;
+}
+
+.space
+{
+    width: 2em;
 }
