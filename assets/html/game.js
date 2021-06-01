@@ -112,10 +112,10 @@ function gameOver(state)
 {
     if (state)
     {
-        document.getElementById("rows").style.backgroundColor = "cyan";
+        document.getElementById("gameover").style.display = "block";
     }
     else
     {
-        document.getElementById("rows").style.backgroundColor = "khaki";
+        document.getElementById("gameover").style.display = "none";
     }
 }

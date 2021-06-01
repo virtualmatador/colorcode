@@ -165,6 +165,7 @@ body > div > div
     margin: 2pt;
     border-radius: 2pt;
     border: 1pt solid black;
+    background-color: cyan;
 }
 
 .row > div
@@ -199,4 +200,15 @@ body > div > div
 .space
 {
     width: 2em;
+}
+
+.over
+{
+    border: 1pt solid black;
+    border-radius: 2pt;
+    background-color: red;
+    color: white;
+    font-size: 12pt;
+    font-weight: bold;
+    padding: 4pt;
 }
