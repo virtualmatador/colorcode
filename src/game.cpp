@@ -25,7 +25,7 @@ main::Game::Game()
         {
             if (!data_.game_over_)
             {
-                std::size_t color = std::stoul(info);
+                int color = std::stoi(info);
                 data_.target_colors_[data_.active_target_] = color;
                 std::ostringstream js;
                 js.str("");
@@ -44,7 +44,7 @@ main::Game::Game()
         {
             if (!data_.game_over_)
             {
-                int active_target = std::stoul(info);
+                int active_target = std::stoi(info);
                 if (data_.active_target_ == active_target)
                 {
                     data_.target_colors_[data_.active_target_] = Data::target_colors_max_;

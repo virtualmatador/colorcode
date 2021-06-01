@@ -1,4 +1,4 @@
 target=ColorCode
-identifier=com.shaidin.colorcode
+identifier=com.shaidin.color-code
 version=1.0.0
 internet=false
