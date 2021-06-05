@@ -15,6 +15,55 @@ main::Menu::Menu()
             return;
         else if (std::strcmp(command, "ready") == 0)
         {
+            std::ostringstream js;
+            js.str("");
+            js.clear();
+            js << "setText(" << (data_.show_text_ ? "true" : "false") << ");";
+            bridge::CallFunction(js.str().c_str());
+            js.str("");
+            js.clear();
+            js << "setSound(" << (data_.sound_ ? "true" : "false") << ");";
+            bridge::CallFunction(js.str().c_str());
+        }
+    };
+    handlers_["text"] = [&](const char* command, const char* info)
+    {
+        if (std::strlen(command) == 0)
+            return;
+        else if (std::strcmp(command, "click") == 0)
+        {
+            if (std::strlen(info) == 0)
+            {
+                return;
+            }
+            else if (std::strcmp(info, "true") == 0)
+            {
+                data_.show_text_ = true;
+            }
+            else if (std::strcmp(info, "false") == 0)
+            {
+                data_.show_text_ = false;
+            }
+        }
+    };
+    handlers_["sound"] = [&](const char* command, const char* info)
+    {
+        if (std::strlen(command) == 0)
+            return;
+        else if (std::strcmp(command, "click") == 0)
+        {
+            if (std::strlen(info) == 0)
+            {
+                return;
+            }
+            else if (std::strcmp(info, "true") == 0)
+            {
+                data_.sound_ = true;
+            }
+            else if (std::strcmp(info, "false") == 0)
+            {
+                data_.sound_ = false;
+            }
         }
     };
     handlers_["play"] = [&](const char* command, const char* info)

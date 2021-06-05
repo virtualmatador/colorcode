@@ -8,26 +8,19 @@ function reset()
     CallHandler("reset", "click", "");
 }
 
-function setLives(lives)
+function setText(state)
 {
-    document.getElementById("lives").innerHTML = "";
-    for (var i = 0; i < lives; ++i)
-        document.getElementById("lives").appendChild(document.createElement("div"));
+    document.getElementById("text").checked = state;
 }
 
-function setLevel(level)
+function setSound(state)
 {
-    document.getElementById("level").innerText = level;
+    document.getElementById("sound").checked = state;
 }
 
-function setScore(score)
+function text()
 {
-    document.getElementById("score").innerText = score;
-}
-
-function setSound(sound)
-{
-    document.getElementById("sound").checked = sound;
+    CallHandler("text", "click", document.getElementById("text").checked.toString());
 }
 
 function sound()

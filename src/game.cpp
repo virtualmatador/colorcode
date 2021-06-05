@@ -14,6 +14,11 @@ main::Game::Game()
             return;
         else if (std::strcmp(command, "ready") == 0)
         {
+            std::ostringstream js;
+            js.str("");
+            js.clear();
+            js << "setText(" << (data_.show_text_ ? "true" : "false") << ");";
+            bridge::CallFunction(js.str().c_str());
             update_view();
         }
     };
@@ -80,7 +85,7 @@ main::Game::Game()
         }
         else if (std::strcmp(command, "reset") == 0)
         {
-            data_.reset();
+            data_.reset_game();
             update_view();
         }
         else if (std::strcmp(command, "step") == 0)
@@ -138,7 +143,7 @@ main::Game::Game()
             }
         }
     };
-    bridge::LoadWebView(index_, (std::int32_t)core::VIEW_INFO::Default, "game", "");
+    bridge::LoadWebView(index_, (std::int32_t)core::VIEW_INFO::Portrait, "game", "");
 }
 
 main::Game::~Game()

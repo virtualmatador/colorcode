@@ -25,7 +25,9 @@ void main::Data::load()
 {
     try
     {
-        toolbox::Load("GAME_SOUND", game_over_, false, false);
+        toolbox::Load("OPTION_TEXT", show_text_, false, false);
+        toolbox::Load("OPTION_SOUND", sound_, false, false);
+        toolbox::Load("GAME_OVER", game_over_, false, false);
         toolbox::Load("GAME_ACTIVE_TARGET", active_target_, 0, targets_max_ + 1);
         if (active_target_ == targets_max_ && !game_over_)
         {
@@ -77,13 +79,15 @@ void main::Data::load()
     }
     catch(...)
     {
-        reset();
+        reset_all();
     }
 }
 
 void main::Data::save() const
 {
-    toolbox::Save("GAME_SOUND", game_over_);
+    toolbox::Save("OPTION_TEXT", show_text_);
+    toolbox::Save("OPTION_SOUND", sound_);
+    toolbox::Save("GAME_OVER", game_over_);
     toolbox::Save("GAME_ACTIVE_TARGET", active_target_);
     for (std::size_t i = 0; i < targets_max_; ++i)
     {
@@ -115,7 +119,14 @@ void main::Data::save() const
     }
 }
 
-void main::Data::reset()
+void main::Data::reset_all()
+{
+    show_text_ = false;
+    sound_ = false;
+    reset_game();
+}
+
+void main::Data::reset_game()
 {
     active_target_ = 0;
     for (auto& target_color : target_colors_)

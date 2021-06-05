@@ -1,3 +1,21 @@
+:root
+{
+    --white-name: "";
+    --yellow-name: "";
+    --orange-name: "";
+    --red-name: "";
+    --green-name: "";
+    --blue-name: "";
+    --empty-name: "";
+
+    --correct-name: "";
+    --half-name: "";
+    --wrong-name: "";
+
+    --target-background: white;
+    --cell-background: linen;
+}
+
 *
 {
     user-select: none;
@@ -13,34 +31,44 @@ body > div > div
     display: inline-block;
 }
 
-.command
+#commands > button
 {
-    width: 6em;
+    width: 25%;
+    height: 2em;
+    border-radius: 4pt;
+    background-color: mintcream;
+}
+
+#go
+{
+    width: 75%;
+    height: 2em;
+    border-radius: 4pt;
+    background-color: mintcream;
 }
 
 #buckets > button
 {
-    width: 5em;
-}
-
-
-#targets > button
-{
-    width: 5em;
-}
-
-#targets > button::after
-{
-    background-color: white;
+    width: 15%;
     border-radius: 4pt;
-    border: 1pt solid gray;
-    padding: 1pt;
+    background-color: var(--target-background);
 }
 
-#targets > button[data-active]::after
+#targets > td > button
 {
-    border: 2pt solid black;
-    padding: 0pt;
+    background-color: var(--target-background);
+    border-color: gray;
+}
+
+#targets > td > button[data-active]
+{
+    background-color: azure;
+    border-color: black;
+}
+
+.colored
+{
+    display: inline-block;
 }
 
 .colored::before
@@ -51,158 +79,172 @@ body > div > div
 
 .colored::after
 {
-    font-size: 18pt;
+    font-size: 12pt;
     display: block;
 }
 
-.colored[data-color="white"]::before
+.colored[data-color="empty"]::before
 {
-    content: "Empty";
+    content: var(--empty-name);
 }
 
-.colored[data-color="white"]::after
+.colored[data-color="empty"]::after
 {
-    content: "-";
-    color: white;
+    content: "\2B1C";
+    color: var(--target-background);
 }
 
-.colored[data-color="gray"]::before
+.colored[data-color="wrong"]::before
 {
-    content: "gray";
+    content: var(--wrong-name);
 }
 
-.colored[data-color="gray"]::after
+.colored[data-color="wrong"]::after
 {
-    content: "\2605";
+    content: "\2737";
+    color: var(--cell-background);
+}
+
+.colored[data-color="half"]::before
+{
+    content: var(--half-name);
+}
+
+.colored[data-color="half"]::after
+{
+    content: "\2737";
     color: gray;
 }
 
-.colored[data-color="black"]::before
+.colored[data-color="full"]::before
 {
-    content: "Black";
+    content: var(--correct-name);
 }
 
-.colored[data-color="black"]::after
+.colored[data-color="full"]::after
 {
-    content: "\2605";
+    content: "\2737";
     color: black;
 }
 
 .colored[data-color="0"]::before
 {
-    content: "Yellow";
+    content: var(--white-name);
 }
 
 .colored[data-color="0"]::after
 {
-    content: "\25B2";
-    color: gold;
+    content: "\2601";
+    color: white;
 }
 
 .colored[data-color="1"]::before
 {
-    content: "Orange";
+    content: var(--yellow-name);
 }
 
 .colored[data-color="1"]::after
 {
-    content: "\2B22";
-    color: darkorange;
+    content: "\1F4A1";
+    color: yellow;
 }
 
 .colored[data-color="2"]::before
 {
-    content: "Red";
+    content: var(--orange-name);
 }
 
 .colored[data-color="2"]::after
 {
-    content: "\2665";
-    color: red;
+    content: "\1F7E0";
+    color: darkorange;
 }
 
 .colored[data-color="3"]::before
 {
-    content: "Green";
+    content: var(--red-name);
 }
 
 .colored[data-color="3"]::after
 {
-    content: "\25FC";
-    color: green;
+    content: "\2764";
+    color: red;
 }
 
 .colored[data-color="4"]::before
 {
-    content: "Blue";
+    content: var(--green-name);
 }
 
 .colored[data-color="4"]::after
 {
-    content: "\25CF";
-    color: blue;
+    content: "\1F340";
+    color: green;
 }
 
 .colored[data-color="5"]::before
 {
-    content: "Brown";
+    content: var(--blue-name);
 }
 
 .colored[data-color="5"]::after
 {
-    content: "\25C6";
-    color: brown;
+    content: "\1F4A7";
+    color: blue;
 }
 
-#rows:empty
+.board
 {
-    display: none;
-}
-
-#rows
-{
-    padding: 4pt;
-    margin: 2pt;
+    padding: 2pt;
+    margin-top: 2pt;
+    margin-bottom: 2pt;
     border-radius: 2pt;
     border: 1pt solid black;
-    background-color: cyan;
+    width: 100%;
+    background-color: gainsboro;
 }
 
-.row > div
+#targets > td:nth-child(1),
+#targets > td:nth-child(2),
+#targets > td:nth-child(3),
+#targets > td:nth-child(4)
 {
-    display: inline-block;
+    width: 14%;
 }
 
-.cell > span
+#targets > td:nth-child(5),
+#targets > td:nth-child(6),
+#targets > td:nth-child(7),
+#targets > td:nth-child(8)
 {
-    width: 4em;
-    display: inline-block;
-    text-align: center;
-    background-color: white;
+    width: 9%;
+}
+
+.column
+{
+    border-radius: 2pt;
+    padding: 0pt;
     border: 1pt solid black;
-    border-radius: 4pt;
-    padding: 2pt;
-    margin: 2pt;
-}
-
-.score > span
-{
-    width: 2em;
-    display: inline-block;
     text-align: center;
-    background-color: white;
-    border: 1pt solid black;
-    border-radius: 4pt;
-    padding: 2pt;
-    margin: 2pt;
+    width: 100%;
 }
 
-.space
+.cell
 {
-    width: 2em;
+    background-color: var(--cell-background);
 }
 
-.over
+.score
+{
+    border-radius: 2pt;
+    padding: 0pt;
+    border: 1pt solid black;
+    text-align: center;
+    background-color: var(--cell-background);
+    width: 100%;
+}
+
+#gameover
 {
     border: 1pt solid black;
     border-radius: 2pt;

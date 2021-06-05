@@ -24,18 +24,21 @@ namespace main
         ~Data();
         void load();
         void save() const;
-        void reset();
+        void reset_all();
+        void reset_game();
 
     private:
         bool validate_targets() const;
         std::array<int, 2> calculate_scores() const;
 
     private:
+        bool show_text_;
+        bool sound_;
+        bool game_over_;
         int active_target_;
         Row::first_type target_colors_;
         Row::first_type choosen_colors_;
         std::vector<Row> rows_;
-        bool game_over_;
         std::random_device seeder_;
         std::default_random_engine random_;
     };
