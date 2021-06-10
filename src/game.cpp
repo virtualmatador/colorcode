@@ -99,7 +99,6 @@ main::Game::Game()
                     add_row(data_.rows_.back());
                     if (scores[0] == Data::targets_max_)
                     {
-                        data_.game_over_ = true;
                         data_.active_target_ = Data::targets_max_;
                         for (std::size_t i = 0; i < 4; ++i)
                         {
@@ -114,7 +113,8 @@ main::Game::Game()
                             js << "clearTargetActive(" << i << ");";
                             bridge::CallFunction(js.str().c_str());
                         }
-                        bridge::CallFunction("gameOver(true);");
+                        data_.game_over_ = 1;
+                        game_over();
                     }
                 }
             }
@@ -123,7 +123,6 @@ main::Game::Game()
         {
             if (!data_.game_over_)
             {
-                data_.game_over_ = true;
                 data_.active_target_ = Data::targets_max_;
                 for (std::size_t i = 0; i < 4; ++i)
                 {
@@ -139,7 +138,8 @@ main::Game::Game()
                     js << "clearTargetActive(" << i << ");";
                     bridge::CallFunction(js.str().c_str());
                 }
-                bridge::CallFunction("gameOver(true);");
+                data_.game_over_ = 2;
+                game_over();
             }
         }
     };
@@ -190,10 +190,7 @@ void main::Game::update_view()
     {
         add_row(row);
     }
-    js.str("");
-    js.clear();
-    js << "gameOver(" << (data_.game_over_ ? "true" : "false") << ");";
-    bridge::CallFunction(js.str().c_str());
+    game_over();
 }
 
 void main::Game::add_row(const Data::Row& row)
@@ -212,5 +209,14 @@ void main::Game::add_row(const Data::Row& row)
         js << score << ", ";
     }
     js << "]);";
+    bridge::CallFunction(js.str().c_str());
+}
+
+void main::Game::game_over()
+{
+    std::ostringstream js;
+    js.str("");
+    js.clear();
+    js << "gameOver(" << data_.game_over_ << ");";
     bridge::CallFunction(js.str().c_str());
 }

@@ -34,7 +34,7 @@ namespace main
     private:
         bool show_text_;
         bool sound_;
-        bool game_over_;
+        int game_over_;
         int active_target_;
         Row::first_type target_colors_;
         Row::first_type choosen_colors_;

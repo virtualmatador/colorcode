@@ -27,7 +27,7 @@ void main::Data::load()
     {
         toolbox::Load("OPTION_TEXT", show_text_, false, false);
         toolbox::Load("OPTION_SOUND", sound_, false, false);
-        toolbox::Load("GAME_OVER", game_over_, false, false);
+        toolbox::Load("GAME_OVER", game_over_, 0, 3);
         toolbox::Load("GAME_ACTIVE_TARGET", active_target_, 0, targets_max_ + 1);
         if (active_target_ == targets_max_ && !game_over_)
         {

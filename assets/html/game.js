@@ -139,12 +139,21 @@ function addRow(colors, scores)
 
 function gameOver(state)
 {
-    if (state)
+    var banner = document.getElementById("gameover");
+    if (state == 1)
     {
-        document.getElementById("gameover").style.display = "block";
+        banner.innerText = "You Win!"
+        banner.style.backgroundColor = "green"
+        banner.style.display = "block";
+    }
+    else if (state == 2)
+    {
+        banner.innerText = "Game Over!"
+        banner.style.backgroundColor = "red"
+        banner.style.display = "block";
     }
     else
     {
-        document.getElementById("gameover").style.display = "none";
+        banner.style.display = "none";
     }
 }
