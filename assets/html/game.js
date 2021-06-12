@@ -96,16 +96,23 @@ function clearRows()
 
 function addRow(colors, scores)
 {
+    var rows = document.getElementById("rows");
+    let y = rows.children.length;
     var row = document.createElement("tr");
     for (color in colors)
     {
+        let x = color;
         var td = document.createElement("td");
         var sel = document.createElement("button");
         sel.classList.add("cell");
         sel.classList.add("colored");
         sel.classList.add("column");
         sel.setAttribute("data-color", colors[color]);
-        td.appendChild(sel)
+        sel.onclick = function ()
+        {
+            CallHandler("guess", "click", y.toString() + " " + x.toString());
+        }
+        td.appendChild(sel);
         row.appendChild(td);
     }
     var score_count = 0;
@@ -113,27 +120,36 @@ function addRow(colors, scores)
     {
         for (var j = 0; j < scores[i]; ++j)
         {
+            let x = score_count + j;
             var td = document.createElement("td");
             var score = document.createElement("button");
             score.classList.add("score");
             score.classList.add("colored");
             score.setAttribute("data-color", ["full", "half"][i]);
-            td.appendChild(score)
+            score.onclick = function ()
+            {
+                CallHandler("score", "click", y.toString() + " " + x.toString());
+            }
+            td.appendChild(score);
             row.appendChild(td);
         }
         score_count += scores[i];
     }
-    for (var i = score_count; i < colors.length; ++i)
+    for (var j = score_count; j < colors.length; ++j)
     {
+        let x = j;
         var td = document.createElement("td");
         var score = document.createElement("button");
         score.classList.add("score");
         score.classList.add("colored");
         score.setAttribute("data-color", "wrong");
-        td.appendChild(score)
+        score.onclick = function ()
+        {
+            CallHandler("score", "click", y.toString() + " " + x.toString());
+        }
+        td.appendChild(score);
         row.appendChild(td);
     }
-    var rows = document.getElementById("rows");
     rows.insertBefore(row, rows.firstChild);
 }
 
@@ -142,14 +158,14 @@ function gameOver(state)
     var banner = document.getElementById("gameover");
     if (state == 1)
     {
-        banner.innerText = "You Win!"
-        banner.style.backgroundColor = "green"
+        banner.innerText = "You Win!";
+        banner.style.backgroundColor = "green";
         banner.style.display = "block";
     }
     else if (state == 2)
     {
-        banner.innerText = "Game Over!"
-        banner.style.backgroundColor = "red"
+        banner.innerText = "Game Over!";
+        banner.style.backgroundColor = "red";
         banner.style.display = "block";
     }
     else
