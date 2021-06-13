@@ -62,12 +62,12 @@ body > div
 #targets > td > button
 {
     background-color: var(--target-background);
-    border-color: gray;
+    border-color: darkgray;
 }
 
 #targets > td > button[data-active]
 {
-    background-color: azure;
+    background-color: darkgray;
     border-color: black;
 }
 
@@ -84,9 +84,10 @@ body > div
 
 .colored::after
 {
-    font-size: 12pt;
+    line-height: 1.5em;
+    font-size: 1.5em;
     display: block;
-    margin-bottom: 1pt;
+    margin: 2pt;
 }
 
 .colored[data-color="empty"]::before
@@ -140,7 +141,7 @@ body > div
 
 .colored[data-color="0"]::after
 {
-    content: "\2620";
+    content: "\2601";
     color: white;
 }
 
