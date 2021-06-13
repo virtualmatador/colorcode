@@ -12,8 +12,10 @@
     --half-name: "";
     --wrong-name: "";
 
-    --target-background: white;
-    --cell-background: whitesmoke;
+    --command-background: mintcream;
+    --target-background: lightgray;
+    --cell-background: silver;
+    --score-background: lightgray;
 }
 
 *
@@ -21,14 +23,17 @@
     user-select: none;
 }
 
-body > div
+body
 {
-    text-align: center;
+    background-color: slategray;
 }
 
-body > div > div
+body > div
 {
-    display: inline-block;
+    max-width: 32em;
+    margin: auto;
+    text-align: center;
+    padding: 2pt;
 }
 
 #commands > button
@@ -36,7 +41,7 @@ body > div > div
     width: 25%;
     height: 2em;
     border-radius: 4pt;
-    background-color: mintcream;
+    background-color: var(--command-background);
 }
 
 #go
@@ -44,7 +49,7 @@ body > div > div
     width: 75%;
     height: 2em;
     border-radius: 4pt;
-    background-color: mintcream;
+    background-color: var(--command-background);
 }
 
 #buckets > button
@@ -81,6 +86,7 @@ body > div > div
 {
     font-size: 12pt;
     display: block;
+    margin-bottom: 1pt;
 }
 
 .colored[data-color="empty"]::before
@@ -101,8 +107,8 @@ body > div > div
 
 .colored[data-color="wrong"]::after
 {
-    content: "\2737";
-    color: var(--cell-background);
+    content: "\2003";
+    color: var(--score-background);
 }
 
 .colored[data-color="half"]::before
@@ -134,7 +140,7 @@ body > div > div
 
 .colored[data-color="0"]::after
 {
-    content: "\2601";
+    content: "\2620";
     color: white;
 }
 
@@ -145,7 +151,7 @@ body > div > div
 
 .colored[data-color="1"]::after
 {
-    content: "\1F4A1";
+    content: "\2600";
     color: yellow;
 }
 
@@ -156,7 +162,7 @@ body > div > div
 
 .colored[data-color="2"]::after
 {
-    content: "\1F7E0";
+    content: "\1F34A";
     color: darkorange;
 }
 
@@ -201,7 +207,7 @@ body > div > div
     border-radius: 2pt;
     border: 1pt solid black;
     width: 100%;
-    background-color: gainsboro;
+    background-color: dimgray;
 }
 
 #targets > td:nth-child(1),
@@ -240,8 +246,8 @@ body > div > div
     padding: 0pt;
     border: 1pt solid black;
     text-align: center;
-    background-color: var(--cell-background);
     width: 100%;
+    background-color: var(--score-background);
 }
 
 #gameover

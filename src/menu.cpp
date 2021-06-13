@@ -26,6 +26,13 @@ main::Menu::Menu()
             bridge::CallFunction(js.str().c_str());
         }
     };
+    handlers_["play"] = [&](const char* command, const char* info)
+    {
+        if (std::strlen(command) == 0)
+            return;
+        else if (std::strcmp(command, "click") == 0)
+            Play();
+    };
     handlers_["text"] = [&](const char* command, const char* info)
     {
         if (std::strlen(command) == 0)
@@ -66,12 +73,12 @@ main::Menu::Menu()
             }
         }
     };
-    handlers_["play"] = [&](const char* command, const char* info)
+    handlers_["reset"] = [&](const char* command, const char* info)
     {
         if (std::strlen(command) == 0)
             return;
         else if (std::strcmp(command, "click") == 0)
-            Play();
+            data_.reset_all();
     };
     bridge::LoadWebView(index_, (std::int32_t)core::VIEW_INFO::Default, "menu", "");
 }

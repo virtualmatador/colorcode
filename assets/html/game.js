@@ -11,9 +11,9 @@ function setText(state)
         vars.style.setProperty("--blue-name", "'Blue'");
         vars.style.setProperty("--empty-name", "'Empty'");
     
-        vars.style.setProperty("--correct-name", "'Yes'");
-        vars.style.setProperty("--half-name", "'Color'");
-        vars.style.setProperty("--wrong-name", "'No'");
+        vars.style.setProperty("--correct-name", "'Black'");
+        vars.style.setProperty("--half-name", "'Gray'");
+        vars.style.setProperty("--wrong-name", "'\u2003'");
     }
     else
     {

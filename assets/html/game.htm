@@ -22,34 +22,36 @@
         <button class="colored" onclick="bucket(5)" data-color="5"></button>
     </div>
     <div id="gameover" style="display: none;"></div>
-    <table class="board">
-        <thead>
-            <tr id="targets">
-                <td rowspan="2">
-                    <button class="colored column" onclick="target(0)"></button>
-                </td>
-                <td rowspan="2">
-                    <button class="colored column" onclick="target(1)"></button>
-                </td>
-                <td rowspan="2">
-                    <button class="colored column" onclick="target(2)"></button>
-                </td>
-                <td rowspan="2">
-                    <button class="colored column" onclick="target(3)"></button>    
-                </td rowspan="2">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td colspan="4" style="text-align: center;">
-                    <button id="go" onclick="go()">Go</button>
-                </td>
-            </tr>
-        </thead>
-        <tbody id="rows">
-        </tbody>
-    </table>
+    <div>
+        <table class="board">
+            <thead>
+                <tr id="targets">
+                    <td rowspan="2">
+                        <button class="colored column" onclick="target(0)"></button>
+                    </td>
+                    <td rowspan="2">
+                        <button class="colored column" onclick="target(1)"></button>
+                    </td>
+                    <td rowspan="2">
+                        <button class="colored column" onclick="target(2)"></button>
+                    </td>
+                    <td rowspan="2">
+                        <button class="colored column" onclick="target(3)"></button>    
+                    </td rowspan="2">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="text-align: center;">
+                        <button id="go" onclick="go()">Go</button>
+                    </td>
+                </tr>
+            </thead>
+            <tbody id="rows">
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
