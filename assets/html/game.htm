@@ -8,50 +8,36 @@
     <title>ColorCode</title>
 </head>
 <body>
-    <div id="commands">
-        <button onclick="stop()">Pause</button>
-        <button onclick="giveUp()">Give Up</button>
-        <button onclick="newGame()">New</button>
+    <div id="header">
+        <div>
+            <button class="bucket colored" onclick="bucket(0)" data-color="0"></button>
+            <button class="bucket colored" onclick="bucket(1)" data-color="1"></button>
+            <button class="bucket colored" onclick="bucket(2)" data-color="2"></button>
+            <button class="bucket colored" onclick="bucket(3)" data-color="3"></button>
+            <button class="bucket colored" onclick="bucket(4)" data-color="4"></button>
+            <button class="bucket colored" onclick="bucket(5)" data-color="5"></button>
+        </div>
+        <div class="row">
+            <div class="left-col" id="targets">
+                <button
+                class="target column colored" onclick="target(0)"></button><button
+                class="target column colored" onclick="target(1)"></button><button
+                class="target column colored" onclick="target(2)"></button><button
+                class="target column colored" onclick="target(3)"></button>
+            </div>
+            <div class="right-col">
+                <button class="command" onclick="go()">Go</button>
+            </div>
+        </div>
+        <div>
+            <div id="gameover" data-show="0"></div>
+        </div>
     </div>
-    <div id="buckets">
-        <button class="colored" onclick="bucket(0)" data-color="0"></button>
-        <button class="colored" onclick="bucket(1)" data-color="1"></button>
-        <button class="colored" onclick="bucket(2)" data-color="2"></button>
-        <button class="colored" onclick="bucket(3)" data-color="3"></button>
-        <button class="colored" onclick="bucket(4)" data-color="4"></button>
-        <button class="colored" onclick="bucket(5)" data-color="5"></button>
-    </div>
-    <div id="gameover" style="display: none;"></div>
-    <div>
-        <table class="board">
-            <thead>
-                <tr id="targets">
-                    <td rowspan="2">
-                        <button class="colored column" onclick="target(0)"></button>
-                    </td>
-                    <td rowspan="2">
-                        <button class="colored column" onclick="target(1)"></button>
-                    </td>
-                    <td rowspan="2">
-                        <button class="colored column" onclick="target(2)"></button>
-                    </td>
-                    <td rowspan="2">
-                        <button class="colored column" onclick="target(3)"></button>    
-                    </td rowspan="2">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td colspan="4" style="text-align: center;">
-                        <button id="go" onclick="go()">Go</button>
-                    </td>
-                </tr>
-            </thead>
-            <tbody id="rows">
-            </tbody>
-        </table>
+    <div id="rows" class="row"></div>
+    <div id="footer">
+        <button class="command" onclick="stop()">Pause</button>
+        <button class="command" onclick="giveUp()">Give Up</button>
+        <button class="command" onclick="newGame()">New</button>
     </div>
 </body>
 </html>

@@ -12,10 +12,7 @@
     --half-name: "";
     --wrong-name: "";
 
-    --command-background: mintcream;
-    --target-background: lightgray;
-    --cell-background: silver;
-    --score-background: lightgray;
+    --text-factor: 1;
 }
 
 *
@@ -23,71 +20,182 @@
     user-select: none;
 }
 
+
+html, body
+{
+    height: 100%;
+    margin: 0;
+}
+
 body
 {
+    display: flex;
+    flex-flow: column;
     background-color: slategray;
 }
 
+#header
+{
+    flex: 0 1 auto;
+}
+  
 body > div
 {
-    max-width: 32em;
-    margin: auto;
     text-align: center;
-    padding: 2pt;
 }
 
-#commands > button
+.bucket
 {
-    width: 25%;
-    height: 2em;
-    border-radius: 4pt;
-    background-color: var(--command-background);
+    width: 13vw;
+    border-radius: 1vw;
+    background-color: lightgray;
+    margin: 0.5vw;
 }
 
-#go
+.target
 {
-    width: 75%;
-    height: 2em;
-    border-radius: 4pt;
-    background-color: var(--command-background);
+    background-color: lightgray;
+    border: 0.1vw solid darkgray;
 }
 
-#buckets > button
-{
-    width: 15%;
-    border-radius: 4pt;
-    background-color: var(--target-background);
-}
-
-#targets > td > button
-{
-    background-color: var(--target-background);
-    border-color: darkgray;
-}
-
-#targets > td > button[data-active]
+.target[data-active]
 {
     background-color: darkgray;
     border-color: black;
 }
 
+.row
+{
+    min-width: 96vw;
+}
+
+#rows
+{
+    flex: 1 1 auto;
+    margin: auto;
+    margin-top: 0.5vw;
+    margin-bottom: 0.5vw;
+    border-radius: 0.5vw;
+    border: 0.15vw solid black;
+    background-color: dimgray;
+    overflow-y: scroll;
+}
+
+.left-col
+{
+    min-width: 52vw;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.right-col
+{
+    min-width: 40vw;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.column
+{
+    width: 12vw;
+    border-radius: 1vw;
+    margin: 0.4vw;
+}
+
+.cell
+{
+    border: 0.1vw solid black;
+    background-color: lightgray;
+}
+
+.score
+{
+    width: 8vw;
+    border-radius: 1vw;
+    border: 0.1vw solid black;
+    background-color: lightgray;
+    margin: 0.4vw;
+}
+
+.index
+{
+    display: inline-block;
+    vertical-align: bottom;
+    width: 3vw;
+    min-width: 2em;
+    font-size: max(0.75em, 2vw);
+    padding-bottom: 2vw;
+    color: white;
+}
+
+#footer
+{
+    flex: 0 1 auto;
+}
+
+.command
+{
+    font-size: max(0.5em, 2vw);
+    width: 24vw;
+    min-width: 3em;
+    height: 5vw;
+    min-height: 2em;
+    border-radius: 1vw;
+    background-color: mintcream;
+    margin: 0.5vw;
+}
+
+#gameover
+{
+    border: 0.15vw solid black;
+    border-radius: 1vw;
+    color: white;
+    font-size: max(1em, 2vw);
+    font-weight: bold;
+    padding: 0.5vw;
+    margin: auto;
+    margin-bottom: 0.5vw;
+    width: max(6em, 24vw);
+}
+
+#gameover[data-show="0"]
+{
+    display: none;
+}
+
+#gameover[data-show="1"]
+{
+    background-color: green;
+}
+
+#gameover[data-show="2"]
+{
+    background-color: red;
+}
+
 .colored
 {
     display: inline-block;
+    padding: 0vw;
+    text-align: center;
 }
 
 .colored::before
 {
-    font-size: 6pt;
+    font-size: max(0.5em, 1vw);
+    margin: 0vw;
+    padding: 0.2vw;
+    text-align: center;
     display: block;
 }
 
 .colored::after
 {
-    line-height: 1.5em;
-    font-size: 1.5em;
+    font-size: max(1em, 3vw);
+    margin: 0vw;
+    padding: 0.2vw;
+    text-align: center;
     display: block;
-    margin: 2pt;
 }
 
 .colored[data-color="empty"]::before
@@ -98,7 +206,7 @@ body > div
 .colored[data-color="empty"]::after
 {
     content: "\2B1C";
-    color: var(--target-background);
+    color: lightgray;
 }
 
 .colored[data-color="wrong"]::before
@@ -198,65 +306,4 @@ body > div
 {
     content: "\1F4A7";
     color: blue;
-}
-
-.board
-{
-    padding: 2pt;
-    margin-top: 2pt;
-    margin-bottom: 2pt;
-    border-radius: 2pt;
-    border: 1pt solid black;
-    width: 100%;
-    background-color: dimgray;
-}
-
-#targets > td:nth-child(1),
-#targets > td:nth-child(2),
-#targets > td:nth-child(3),
-#targets > td:nth-child(4)
-{
-    width: 14%;
-}
-
-#targets > td:nth-child(5),
-#targets > td:nth-child(6),
-#targets > td:nth-child(7),
-#targets > td:nth-child(8)
-{
-    width: 9%;
-}
-
-.column
-{
-    border-radius: 2pt;
-    padding: 0pt;
-    border: 1pt solid black;
-    text-align: center;
-    width: 100%;
-}
-
-.cell
-{
-    background-color: var(--cell-background);
-}
-
-.score
-{
-    border-radius: 2pt;
-    padding: 0pt;
-    border: 1pt solid black;
-    text-align: center;
-    width: 100%;
-    background-color: var(--score-background);
-}
-
-#gameover
-{
-    border: 1pt solid black;
-    border-radius: 2pt;
-    color: white;
-    font-size: 12pt;
-    font-weight: bold;
-    padding: 4pt;
 }
