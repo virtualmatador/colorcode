@@ -154,6 +154,7 @@ body > div
     font-weight: bold;
     padding: 0.5vw;
     margin: auto;
+    margin-top: 0.5vw;
     margin-bottom: 0.5vw;
     width: max(6em, 24vw);
 }
