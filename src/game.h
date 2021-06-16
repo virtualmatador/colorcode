@@ -17,6 +17,7 @@ namespace main
     private:
         void update_view();
         void add_row(const Data::Row& row);
+        void give_up();
         void game_over();
     };
 }

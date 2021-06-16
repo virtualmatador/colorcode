@@ -13,11 +13,6 @@ body > div > div
     display: inline-block;
 }
 
-button
-{
-    width: 5em;
-}
-
 h4
 {
     text-align: left;
@@ -26,4 +21,21 @@ h4
 p
 {
     text-align: left;
+}
+
+.controls
+{
+    text-align: left;
+}
+
+.controls > *
+{
+    font-size: 1em;
+    margin-top: 6pt;
+    margin-bottom: 6pt;
+}
+
+.controls > button
+{
+    width: 6em;
 }

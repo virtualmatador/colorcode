@@ -76,9 +76,14 @@ main::Menu::Menu()
     handlers_["reset"] = [&](const char* command, const char* info)
     {
         if (std::strlen(command) == 0)
+        {
             return;
+        }
         else if (std::strcmp(command, "click") == 0)
+        {
             data_.reset_all();
+            bridge::NeedRestart();
+        }
     };
     bridge::LoadWebView(index_,
         (std::int32_t)core::VIEW_INFO::Default |

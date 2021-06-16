@@ -154,7 +154,11 @@ function addRow(colors, scores)
         }
         right_col.appendChild(score);
     }
-    var index = document.createElement("div");
+    var index = document.createElement("button");
+    index.onclick = function ()
+    {
+        CallHandler("index", "click", y.toString());
+    }
     index.classList.add("index");
     index.innerText = y + 1;
     right_col.appendChild(index);

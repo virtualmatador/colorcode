@@ -84,14 +84,14 @@ body > div
 .left-col
 {
     min-width: 52vw;
-    display: inline-block;
+    display: inline-flex;
     vertical-align: middle;
 }
 
 .right-col
 {
     min-width: 40vw;
-    display: inline-block;
+    display: inline-flex;
     vertical-align: middle;
 }
 
@@ -119,12 +119,15 @@ body > div
 
 .index
 {
-    display: inline-block;
-    vertical-align: bottom;
     width: 3vw;
     min-width: 2em;
+    border-radius: 1vw;
+    border: 0.1vw solid black;
+    background-color: gray;
+    margin: 0.4vw;
+    padding-left: 0pt;
+    padding-right: 0pt;
     font-size: max(0.75em, 2vw);
-    padding-bottom: 2vw;
     color: white;
 }
 

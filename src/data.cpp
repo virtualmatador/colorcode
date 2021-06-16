@@ -11,6 +11,7 @@ main::Data main::data_;
 
 const int main::Data::targets_max_;
 const int main::Data::target_colors_max_;
+const int main::Data::rows_max_;
 
 main::Data::Data()
     : random_{seeder_()}

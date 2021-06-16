@@ -12,6 +12,7 @@ namespace main
     {
         static const int targets_max_ = 4;
         static const int target_colors_max_ = 6;
+        static const int rows_max_ = 20;
         friend class Menu;
         friend class Game;
 

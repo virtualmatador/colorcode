@@ -40,7 +40,7 @@ main::Game::Game()
                 bridge::CallFunction(js.str().c_str());
                 if (data_.sound_)
                 {
-                    bridge::PlayAudio(color);
+                    bridge::PlayAudio(20 + color);
                 }
             }
         }
@@ -78,14 +78,14 @@ main::Game::Game()
                 }
                 if (data_.sound_)
                 {
-                    bridge::PlayAudio(6 + active_target);
+                    bridge::PlayAudio(active_target);
                 }
             }
             else if (data_.game_over_ == 2)
             {
                 if (data_.sound_)
                 {
-                    bridge::PlayAudio(data_.target_colors_[active_target]);
+                    bridge::PlayAudio(20 + data_.target_colors_[active_target]);
                 }
             }
         }
@@ -104,7 +104,7 @@ main::Game::Game()
             {
                 if (data_.sound_)
                 {
-                    bridge::PlayAudio(15);
+                    bridge::PlayAudio(31);
                 }
             }
             data_.reset_game();
@@ -139,14 +139,18 @@ main::Game::Game()
                         game_over();
                         if (data_.sound_)
                         {
-                            bridge::PlayAudio(14);
+                            bridge::PlayAudio(30);
                         }
+                    }
+                    else if (data_.rows_.size() == data_.rows_max_)
+                    {
+                        give_up();
                     }
                     else
                     {
                         if (data_.sound_)
                         {
-                            bridge::PlayAudio(13);
+                            bridge::PlayAudio(29);
                         }
                     }
                 }
@@ -154,7 +158,7 @@ main::Game::Game()
                 {
                     if (data_.sound_)
                     {
-                        bridge::PlayAudio(12);
+                        bridge::PlayAudio(28);
                     }
                 }
             }
@@ -163,27 +167,7 @@ main::Game::Game()
         {
             if (data_.game_over_ == 0)
             {
-                data_.active_target_ = Data::targets_max_;
-                for (std::size_t i = 0; i < 4; ++i)
-                {
-                    data_.target_colors_[i] = data_.choosen_colors_[i];
-                    std::ostringstream js;
-                    js.str("");
-                    js.clear();
-                    js << "setTargetColor(" << i << ", "
-                        << data_.target_colors_[i] << ");";
-                    bridge::CallFunction(js.str().c_str());
-                    js.str("");
-                    js.clear();
-                    js << "clearTargetActive(" << i << ");";
-                    bridge::CallFunction(js.str().c_str());
-                }
-                data_.game_over_ = 2;
-                game_over();
-                if (data_.sound_)
-                {
-                    bridge::PlayAudio(15);
-                }
+                give_up();
             }
         }
     };
@@ -198,7 +182,7 @@ main::Game::Game()
             is >> row >> column;
             if (data_.sound_)
             {
-                bridge::PlayAudio(data_.rows_[row].first[column]);
+                bridge::PlayAudio(20 + data_.rows_[row].first[column]);
             }
         }
     };
@@ -215,22 +199,35 @@ main::Game::Game()
             {
                 if (data_.sound_)
                 {
-                    bridge::PlayAudio( 6 + 4 + 0);
+                    bridge::PlayAudio(20 + 6 + 0);
                 }
             }
             else if (column < data_.rows_[row].second[0] + data_.rows_[row].second[1])
             {
                 if (data_.sound_)
                 {
-                    bridge::PlayAudio( 6 + 4 + 1);
+                    bridge::PlayAudio(20 + 6 + 1);
                 }
             }
         }
     };
+    handlers_["index"] = [&](const char* command, const char* info)
+    {
+        if (std::strlen(command) == 0)
+            return;
+        else if (std::strcmp(command, "click") == 0)
+        {
+            std::istringstream is{ info };
+            int index;
+            is >> index;
+            bridge::PlayAudio(index);
+        }
+    };
     bridge::LoadWebView(index_,
         (std::int32_t)core::VIEW_INFO::Portrait |
-        (std::int32_t)core::VIEW_INFO::AudioNoSolo,
-        "game", "c0 c1 c2 c3 c4 c5 g0 g1 g2 g3 s0 s1 p0 p1 e0 e1");
+        (std::int32_t)core::VIEW_INFO::AudioNoSolo, "game",
+        "n0 n1 n2 n3 n4 n5 n6 n7 n8 n9 n10 n11 n12 n13 n14 n15 n16 n17 n18 n19"
+        " c0 c1 c2 c3 c4 c5 s0 s1 p0 p1 e0 e1");
 }
 
 main::Game::~Game()
@@ -297,6 +294,31 @@ void main::Game::add_row(const Data::Row& row)
     }
     js << "]);";
     bridge::CallFunction(js.str().c_str());
+}
+
+void main::Game::give_up()
+{
+    data_.active_target_ = Data::targets_max_;
+    for (std::size_t i = 0; i < 4; ++i)
+    {
+        data_.target_colors_[i] = data_.choosen_colors_[i];
+        std::ostringstream js;
+        js.str("");
+        js.clear();
+        js << "setTargetColor(" << i << ", "
+            << data_.target_colors_[i] << ");";
+        bridge::CallFunction(js.str().c_str());
+        js.str("");
+        js.clear();
+        js << "clearTargetActive(" << i << ");";
+        bridge::CallFunction(js.str().c_str());
+    }
+    data_.game_over_ = 2;
+    game_over();
+    if (data_.sound_)
+    {
+        bridge::PlayAudio(31);
+    }
 }
 
 void main::Game::game_over()
