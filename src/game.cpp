@@ -227,7 +227,9 @@ main::Game::Game()
             }
         }
     };
-    bridge::LoadWebView(index_, (std::int32_t)core::VIEW_INFO::Portrait,
+    bridge::LoadWebView(index_,
+        (std::int32_t)core::VIEW_INFO::Portrait |
+        (std::int32_t)core::VIEW_INFO::AudioNoSolo,
         "game", "c0 c1 c2 c3 c4 c5 g0 g1 g2 g3 s0 s1 p0 p1 e0 e1");
 }
 

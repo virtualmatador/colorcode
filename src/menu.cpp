@@ -80,7 +80,10 @@ main::Menu::Menu()
         else if (std::strcmp(command, "click") == 0)
             data_.reset_all();
     };
-    bridge::LoadWebView(index_, (std::int32_t)core::VIEW_INFO::Default, "menu", "");
+    bridge::LoadWebView(index_,
+        (std::int32_t)core::VIEW_INFO::Default |
+        (std::int32_t) core::VIEW_INFO::AudioNoSolo,
+        "menu", "");
 }
 
 main::Menu::~Menu()
