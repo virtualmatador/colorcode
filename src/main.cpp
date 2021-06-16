@@ -9,27 +9,25 @@ main::PROGRESS main::progress_ = main::PROGRESS::MENU;
 
 void life_cycle::Begin()
 {
-
+    main::data_.load();
 }
 
 void life_cycle::End()
 {
-
+    main::data_.save();
 }
 
 void life_cycle::Create()
 {
-
 }
 
 void life_cycle::Destroy()
 {
-
+    main::data_.save();
 }
 
 void life_cycle::Start()
 {
-    main::data_.load();
 }
 
 void life_cycle::Stop()
@@ -39,6 +37,7 @@ void life_cycle::Stop()
 
 void life_cycle::Restart()
 {
+    main::data_.save();
     switch (main::progress_)
     {
         case main::PROGRESS::MENU:
