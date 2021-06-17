@@ -75,6 +75,8 @@ body > div
     margin: auto;
     margin-top: 0.5vw;
     margin-bottom: 0.5vw;
+    padding-top: 1vw;
+    padding-bottom: 1vw;
     border-radius: 0.5vw;
     border: 0.15vw solid black;
     background-color: dimgray;
@@ -90,7 +92,7 @@ body > div
 
 .right-col
 {
-    min-width: 40vw;
+    min-width: 42vw;
     display: inline-flex;
     vertical-align: middle;
 }
@@ -127,7 +129,7 @@ body > div
     margin: 0.4vw;
     padding-left: 0pt;
     padding-right: 0pt;
-    font-size: max(0.75em, 2vw);
+    font-size: max(0.75em, 3vw);
     color: white;
 }
 
@@ -138,7 +140,7 @@ body > div
 
 .command
 {
-    font-size: max(0.5em, 2vw);
+    font-size: max(0.75em, 3vw);
     width: 24vw;
     min-width: 3em;
     height: 5vw;
@@ -186,7 +188,7 @@ body > div
 
 .colored::before
 {
-    font-size: max(0.5em, 1vw);
+    font-size: max(0.5em, 2vw);
     margin: 0vw;
     padding: 0.2vw;
     text-align: center;
@@ -195,7 +197,7 @@ body > div
 
 .colored::after
 {
-    font-size: max(1em, 3vw);
+    font-size: max(1.5em, 5vw);
     margin: 0vw;
     padding: 0.2vw;
     text-align: center;
