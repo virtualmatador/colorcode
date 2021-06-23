@@ -220,7 +220,10 @@ main::Game::Game()
             std::istringstream is{ info };
             int index;
             is >> index;
-            bridge::PlayAudio(index);
+            if (data_.sound_)
+            {
+                bridge::PlayAudio(index);
+            }
         }
     };
     bridge::LoadWebView(index_,

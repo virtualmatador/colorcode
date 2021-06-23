@@ -12,7 +12,7 @@
     --half-name: "";
     --wrong-name: "";
 
-    --text-factor: 1;
+    --vw: min(1vw, calc(0.75 * 1vh));
 }
 
 *
@@ -46,16 +46,15 @@ body > div
 
 .bucket
 {
-    width: 13vw;
-    border-radius: 1vw;
+    width: calc(14 * var(--vw));
+    border-radius: calc(2 * var(--vw));
     background-color: lightgray;
-    margin: 0.5vw;
 }
 
 .target
 {
     background-color: lightgray;
-    border: 0.1vw solid darkgray;
+    border: calc(0.1 * var(--vw)) solid darkgray;
 }
 
 .target[data-active]
@@ -66,70 +65,70 @@ body > div
 
 .row
 {
-    min-width: 96vw;
+    min-width: calc(98 * var(--vw));
 }
 
 #rows
 {
     flex: 1 1 auto;
     margin: auto;
-    margin-top: 0.5vw;
-    margin-bottom: 0.5vw;
-    padding-top: 1vw;
-    padding-bottom: 1vw;
-    border-radius: 0.5vw;
-    border: 0.15vw solid black;
+    margin-top: calc(0.5 * var(--vw));
+    margin-bottom: calc(0.5 * var(--vw));
+    padding-top: calc(1 * var(--vw));
+    padding-bottom: calc(1 * var(--vw));
+    border-radius: calc(0.5 * var(--vw));
+    border: calc(0.15 * var(--vw)) solid black;
     background-color: dimgray;
     overflow-y: scroll;
 }
 
 .left-col
 {
-    min-width: 52vw;
+    min-width: calc(56 * var(--vw));
     display: inline-flex;
     vertical-align: middle;
 }
 
 .right-col
 {
-    min-width: 42vw;
+    min-width: calc(39 * var(--vw));
     display: inline-flex;
     vertical-align: middle;
 }
 
 .column
 {
-    width: 12vw;
-    border-radius: 1vw;
-    margin: 0.4vw;
+    width: calc(13 * var(--vw));
+    border-radius: calc(1 * var(--vw));
+    margin: calc(0.4 * var(--vw));
 }
 
 .cell
 {
-    border: 0.1vw solid black;
+    border: calc(0.1 * var(--vw)) solid black;
     background-color: lightgray;
 }
 
 .score
 {
-    width: 8vw;
-    border-radius: 1vw;
-    border: 0.1vw solid black;
+    width: calc(7 * var(--vw));
+    border-radius: calc(1 * var(--vw));
+    border: calc(0.1 * var(--vw)) solid black;
     background-color: lightgray;
-    margin: 0.4vw;
+    margin: calc(0.4 * var(--vw));
 }
 
 .index
 {
-    width: 3vw;
+    width: calc(8 * var(--vw));
     min-width: 2em;
-    border-radius: 1vw;
-    border: 0.1vw solid black;
+    border-radius: calc(1 * var(--vw));
+    border: calc(0.1 * var(--vw)) solid black;
     background-color: gray;
-    margin: 0.4vw;
+    margin: calc(0.4 * var(--vw));
     padding-left: 0pt;
     padding-right: 0pt;
-    font-size: max(0.75em, 3vw);
+    font-size: max(1em, calc(4 * var(--vw)));
     color: white;
 }
 
@@ -140,28 +139,28 @@ body > div
 
 .command
 {
-    font-size: max(0.75em, 3vw);
-    width: 24vw;
+    font-size: max(0.75em, calc(3 * var(--vw)));
+    width: calc(24 * var(--vw));
     min-width: 3em;
-    height: 5vw;
+    height: calc(5 * var(--vw));
     min-height: 2em;
-    border-radius: 1vw;
+    border-radius: calc(1 * var(--vw));
     background-color: mintcream;
-    margin: 0.5vw;
+    margin: auto;
 }
 
 #gameover
 {
-    border: 0.15vw solid black;
-    border-radius: 1vw;
+    border: calc(0.15 * var(--vw)) solid black;
+    border-radius: calc(1 * var(--vw));
     color: white;
-    font-size: max(1em, 2vw);
+    font-size: max(1em, calc(2 * var(--vw)));
     font-weight: bold;
-    padding: 0.5vw;
+    padding: calc(0.5 * var(--vw));
     margin: auto;
-    margin-top: 0.5vw;
-    margin-bottom: 0.5vw;
-    width: max(6em, 24vw);
+    margin-top: calc(0.5 * var(--vw));
+    margin-bottom: calc(0.5 * var(--vw));
+    width: max(6em, calc(24 * var(--vw)));
 }
 
 #gameover[data-show="0"]
@@ -182,26 +181,44 @@ body > div
 .colored
 {
     display: inline-block;
-    padding: 0vw;
+    padding-top: calc(0.5 * var(--vw));
+    padding-bottom: calc(0.5 * var(--vw));
+    padding-left: 0pt;
+    padding-right: 0pt;
     text-align: center;
 }
 
 .colored::before
 {
-    font-size: max(0.5em, 2vw);
-    margin: 0vw;
-    padding: 0.2vw;
-    text-align: center;
+    font-size: max(0.5em, calc(2 * var(--vw)));
+    margin: auto;
     display: block;
 }
 
 .colored::after
 {
-    font-size: max(1.5em, 5vw);
-    margin: 0vw;
-    padding: 0.2vw;
-    text-align: center;
+    margin: auto;
+    content: "";
+    background-size: 100% 100%;
     display: block;
+}
+
+.bucket.colored::after
+{
+    width: max(1em, calc(12 * var(--vw)));
+    height: max(1em, calc(12 * var(--vw)));
+}
+
+.column.colored::after
+{
+    width: max(1em, calc(10 * var(--vw)));
+    height: max(1em, calc(10 * var(--vw)));
+}
+
+.score.colored::after
+{
+    width: max(0.5em, calc(5 * var(--vw)));
+    height: max(0.5em, calc(5 * var(--vw)));
 }
 
 .colored[data-color="empty"]::before
@@ -211,8 +228,7 @@ body > div
 
 .colored[data-color="empty"]::after
 {
-    content: "\2B1C";
-    color: lightgray;
+    background-image: url("color/empty.png");
 }
 
 .colored[data-color="wrong"]::before
@@ -222,8 +238,7 @@ body > div
 
 .colored[data-color="wrong"]::after
 {
-    content: "\2003";
-    color: var(--score-background);
+    background-image: url("color/wrong.png");
 }
 
 .colored[data-color="half"]::before
@@ -233,8 +248,7 @@ body > div
 
 .colored[data-color="half"]::after
 {
-    content: "\2737";
-    color: gray;
+    background-image: url("color/gray.png");
 }
 
 .colored[data-color="full"]::before
@@ -244,8 +258,7 @@ body > div
 
 .colored[data-color="full"]::after
 {
-    content: "\2737";
-    color: black;
+    background-image: url("color/black.png");
 }
 
 .colored[data-color="0"]::before
@@ -255,8 +268,7 @@ body > div
 
 .colored[data-color="0"]::after
 {
-    content: "\2601";
-    color: white;
+    background-image: url("color/white.png");
 }
 
 .colored[data-color="1"]::before
@@ -266,8 +278,7 @@ body > div
 
 .colored[data-color="1"]::after
 {
-    content: "\2600";
-    color: yellow;
+    background-image: url("color/yellow.png");
 }
 
 .colored[data-color="2"]::before
@@ -277,8 +288,7 @@ body > div
 
 .colored[data-color="2"]::after
 {
-    content: "\1F34A";
-    color: darkorange;
+    background-image: url("color/orange.png");
 }
 
 .colored[data-color="3"]::before
@@ -288,8 +298,7 @@ body > div
 
 .colored[data-color="3"]::after
 {
-    content: "\2764";
-    color: red;
+    background-image: url("color/red.png");
 }
 
 .colored[data-color="4"]::before
@@ -299,8 +308,7 @@ body > div
 
 .colored[data-color="4"]::after
 {
-    content: "\1F340";
-    color: green;
+    background-image: url("color/green.png");
 }
 
 .colored[data-color="5"]::before
@@ -310,6 +318,5 @@ body > div
 
 .colored[data-color="5"]::after
 {
-    content: "\1F4A7";
-    color: blue;
+    background-image: url("color/blue.png");
 }
