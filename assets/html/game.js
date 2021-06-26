@@ -164,7 +164,7 @@ function addRow(colors, scores)
     }
     row.appendChild(right_col);
     rows.insertBefore(row, rows.firstChild);
-    row.scrollIntoView(true);
+    row.scrollIntoView(false);
 }
 
 function gameOver(state)

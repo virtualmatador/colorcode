@@ -32,17 +32,29 @@ body
     display: flex;
     flex-flow: column;
     background-color: slategray;
+    text-align: center;
 }
 
-#header
-{
-    flex: 0 1 auto;
-    padding: calc(0.5 * var(--vw));
-}
-  
 body > div
 {
-    text-align: center;
+    margin: auto;
+    min-width: calc(98 * var(--vw));
+}
+
+body > div > div
+{
+    margin-top: calc(1 * var(--vw));
+    margin-bottom: calc(1 * var(--vw));
+}
+
+body > div:not(last-child)
+{
+    flex: 0 1 auto;
+}
+
+body > div:last-child
+{
+    flex: 1 1 auto;
 }
 
 #menu
@@ -103,43 +115,42 @@ body > div
     border-color: black;
 }
 
-.row
-{
-    min-width: calc(98 * var(--vw));
-}
-
 #rows
 {
-    flex: 1 1 auto;
-    margin: auto;
-    margin-top: calc(0.5 * var(--vw));
-    margin-bottom: calc(0.5 * var(--vw));
-    padding-top: calc(1 * var(--vw));
-    padding-bottom: calc(1 * var(--vw));
     border-radius: calc(0.5 * var(--vw));
     border: calc(0.15 * var(--vw)) solid black;
     background-color: dimgray;
-    overflow-y: scroll;
+    margin-bottom: calc(1 * var(--vw));
+    overflow-y: auto;
+}
+
+.row
+{
+    text-align: left;
+}
+
+.row > div
+{
+    display: inline-flex;
+    vertical-align: middle;
 }
 
 .left-col
 {
-    min-width: calc(64 * var(--vw));
-    display: inline-flex;
-    vertical-align: middle;
+    margin-left: calc(1 * var(--vw));
+    margin-right: calc(1 * var(--vw));
+    min-width: calc(60 * var(--vw));
     justify-content: flex-end;
 }
 
 .right-col
 {
     min-width: calc(30 * var(--vw));
-    display: inline-flex;
-    vertical-align: middle;
 }
 
 .column
 {
-    width: calc(13 * var(--vw));
+    width: calc(12 * var(--vw));
     border-radius: calc(1 * var(--vw));
     margin-left: calc(0.4 * var(--vw));
     margin-right: calc(0.4 * var(--vw));
@@ -166,8 +177,7 @@ body > div
     width: max(1em, calc(8 * var(--vw)));
     border-radius: calc(1 * var(--vw));
     border: calc(0.1 * var(--vw)) solid black;
-    margin-left: calc(0.4 * var(--vw));
-    margin-right: calc(0.4 * var(--vw));
+    margin-right: calc(1 * var(--vw));
     margin-top: auto;
     margin-bottom: auto;
     padding-left: 0pt;
@@ -196,10 +206,9 @@ body > div
     color: white;
     font-size: max(1em, calc(3 * var(--vw)));
     font-weight: bold;
-    padding: calc(0.5 * var(--vw));
-    margin: auto;
-    margin-top: calc(1 * var(--vw));
     width: max(6em, calc(24 * var(--vw)));
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #gameover[data-show="0"]
@@ -250,8 +259,8 @@ body > div
 
 .column.colored::after
 {
-    width: max(1em, calc(10 * var(--vw)));
-    height: max(1em, calc(10 * var(--vw)));
+    width: max(1em, calc(9 * var(--vw)));
+    height: max(1em, calc(9 * var(--vw)));
 }
 
 .score.colored::after
