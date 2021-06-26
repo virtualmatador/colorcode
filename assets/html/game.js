@@ -106,6 +106,14 @@ function addRow(colors, scores)
     row.classList.add("row");
     var left_col = document.createElement("div");
     left_col.classList.add("left-col");
+    var index = document.createElement("button");
+    index.onclick = function ()
+    {
+        CallHandler("index", "click", y.toString());
+    }
+    index.classList.add("index");
+    index.innerText = y + 1;
+    left_col.appendChild(index);
     for (color in colors)
     {
         let x = color;
@@ -154,14 +162,6 @@ function addRow(colors, scores)
         }
         right_col.appendChild(score);
     }
-    var index = document.createElement("button");
-    index.onclick = function ()
-    {
-        CallHandler("index", "click", y.toString());
-    }
-    index.classList.add("index");
-    index.innerText = y + 1;
-    right_col.appendChild(index);
     row.appendChild(right_col);
     rows.insertBefore(row, rows.firstChild);
     row.scrollIntoView(true);
@@ -182,5 +182,26 @@ function gameOver(state)
         case 2:
             banner.textContent = "Game Over!";
         break;
+    }
+}
+
+function more(hide)
+{
+    var options = document.getElementById("options");
+    if (hide || options.style.display == "block")
+    {
+        options.style.display = "none";
+    }
+    else
+    {
+        options.style.display = "block";
+    }
+}
+
+window.onclick = function(event)
+{
+    if (event.target != document.getElementById("more"))
+    {
+        more(true);
     }
 }

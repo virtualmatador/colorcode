@@ -37,6 +37,7 @@ body
 #header
 {
     flex: 0 1 auto;
+    padding: calc(0.5 * var(--vw));
 }
   
 body > div
@@ -44,9 +45,48 @@ body > div
     text-align: center;
 }
 
+#menu
+{
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+}
+
+#more
+{
+    width: calc(10 * var(--vw));
+    height: auto;
+}
+
+#options
+{
+    display: none;
+    position: absolute;
+    right: 0pt;
+    margin-top: calc(1 * var(--vw));
+    background-color: mintcream;
+    border: calc(0.1 * var(--vw)) solid black;
+    border-radius: calc(2 * var(--vw));
+    font-size: max(0.75em, calc(3 * var(--vw)));
+    width: calc(25 * var(--vw));
+    min-width: 3em;
+    box-shadow: 0pt 0pt calc(5 * var(--vw)) black;
+}
+
+#options > div
+{
+    cursor: default;
+    padding: calc(2 * var(--vw));
+}
+
+#options > div:not(:first-child)
+{
+    border-top: calc(0.2 * var(--vw)) solid gray;
+}
+
 .bucket
 {
-    width: calc(14 * var(--vw));
+    width: calc(13 * var(--vw));
     border-radius: calc(2 * var(--vw));
     background-color: lightgray;
 }
@@ -84,14 +124,15 @@ body > div
 
 .left-col
 {
-    min-width: calc(56 * var(--vw));
+    min-width: calc(64 * var(--vw));
     display: inline-flex;
     vertical-align: middle;
+    justify-content: flex-end;
 }
 
 .right-col
 {
-    min-width: calc(39 * var(--vw));
+    min-width: calc(30 * var(--vw));
     display: inline-flex;
     vertical-align: middle;
 }
@@ -100,7 +141,8 @@ body > div
 {
     width: calc(13 * var(--vw));
     border-radius: calc(1 * var(--vw));
-    margin: calc(0.4 * var(--vw));
+    margin-left: calc(0.4 * var(--vw));
+    margin-right: calc(0.4 * var(--vw));
 }
 
 .cell
@@ -115,35 +157,33 @@ body > div
     border-radius: calc(1 * var(--vw));
     border: calc(0.1 * var(--vw)) solid black;
     background-color: lightgray;
-    margin: calc(0.4 * var(--vw));
+    margin-left: calc(0.4 * var(--vw));
+    margin-right: calc(0.4 * var(--vw));
 }
 
 .index
 {
-    width: calc(8 * var(--vw));
-    min-width: 2em;
+    width: max(1em, calc(8 * var(--vw)));
     border-radius: calc(1 * var(--vw));
     border: calc(0.1 * var(--vw)) solid black;
-    background-color: gray;
-    margin: calc(0.4 * var(--vw));
+    margin-left: calc(0.4 * var(--vw));
+    margin-right: calc(0.4 * var(--vw));
+    margin-top: auto;
+    margin-bottom: auto;
     padding-left: 0pt;
     padding-right: 0pt;
-    font-size: max(1em, calc(4 * var(--vw)));
+    font-size: max(0.5em, calc(4 * var(--vw)));
+    background-color: gray;
     color: white;
 }
 
-#footer
-{
-    flex: 0 1 auto;
-}
-
-.command
+#go
 {
     font-size: max(0.75em, calc(3 * var(--vw)));
-    width: calc(24 * var(--vw));
-    min-width: 3em;
-    height: calc(5 * var(--vw));
-    min-height: 2em;
+    width: calc(16 * var(--vw));
+    min-width: 2em;
+    height: calc(8 * var(--vw));
+    min-height: 1em;
     border-radius: calc(1 * var(--vw));
     background-color: mintcream;
     margin: auto;
@@ -154,12 +194,11 @@ body > div
     border: calc(0.15 * var(--vw)) solid black;
     border-radius: calc(1 * var(--vw));
     color: white;
-    font-size: max(1em, calc(2 * var(--vw)));
+    font-size: max(1em, calc(3 * var(--vw)));
     font-weight: bold;
     padding: calc(0.5 * var(--vw));
     margin: auto;
-    margin-top: calc(0.5 * var(--vw));
-    margin-bottom: calc(0.5 * var(--vw));
+    margin-top: calc(1 * var(--vw));
     width: max(6em, calc(24 * var(--vw)));
 }
 
@@ -205,8 +244,8 @@ body > div
 
 .bucket.colored::after
 {
-    width: max(1em, calc(12 * var(--vw)));
-    height: max(1em, calc(12 * var(--vw)));
+    width: max(1em, calc(11 * var(--vw)));
+    height: max(1em, calc(11 * var(--vw)));
 }
 
 .column.colored::after
@@ -238,7 +277,7 @@ body > div
 
 .colored[data-color="wrong"]::after
 {
-    background-image: url("color/wrong.png");
+    background-image: url("score/wrong.png");
 }
 
 .colored[data-color="half"]::before
@@ -248,7 +287,7 @@ body > div
 
 .colored[data-color="half"]::after
 {
-    background-image: url("color/gray.png");
+    background-image: url("score/gray.png");
 }
 
 .colored[data-color="full"]::before
@@ -258,7 +297,7 @@ body > div
 
 .colored[data-color="full"]::after
 {
-    background-image: url("color/black.png");
+    background-image: url("score/black.png");
 }
 
 .colored[data-color="0"]::before
