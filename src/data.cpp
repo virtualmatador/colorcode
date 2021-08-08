@@ -1,7 +1,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "../cross/core/src/bridge.h"
+#include "bridge.h"
 
 #include "data.h"
 

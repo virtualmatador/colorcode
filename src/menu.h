@@ -1,7 +1,7 @@
 #ifndef SRC_MENU_H
 #define SRC_MENU_H
 
-#include "../cross/core/src/stage.h"
+#include "stage.h"
 
 namespace main
 {

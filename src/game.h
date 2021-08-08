@@ -1,7 +1,7 @@
 #ifndef SRC_GAME_H
 #define SRC_GAME_H
 
-#include "../cross/core/src/stage.h"
+#include "stage.h"
 
 #include "data.h"
 

@@ -1,7 +1,7 @@
 #include <sstream>
 #include <cstring>
 
-#include "../cross/core/src/helper.h"
+#include "helper.h"
 
 #include "game.h"
 #include "progress.h"
