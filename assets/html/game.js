@@ -14,8 +14,6 @@ function setText(state)
         vars.style.setProperty("--correct-name", "'Black'");
         vars.style.setProperty("--half-name", "'Gray'");
         vars.style.setProperty("--wrong-name", "'\u2003'");
-        
-        vars.style.setProperty("--text-factor", "1");
     }
     else
     {
@@ -30,8 +28,6 @@ function setText(state)
         vars.style.setProperty("--half-name", "");
         vars.style.setProperty("--wrong-name", "");
         vars.style.setProperty("--empty-name", "");
-
-        vars.style.setProperty("--text-factor", "0");
     }
 }
 

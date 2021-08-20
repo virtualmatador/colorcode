@@ -12,7 +12,7 @@
     --half-name: "";
     --wrong-name: "";
 
-    --vw: min(1vw, calc(0.75 * 1vh));
+    --vw: min(1vw, 0.75vh);
 }
 
 *
