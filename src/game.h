@@ -13,8 +13,11 @@ namespace main
         Game();
         ~Game();
         void Escape() override;
+        void FeedUri(const char* uri, std::function<void(
+            const std::vector<unsigned char>&)>&& consume) override;
 
     private:
+        void play_audio(const char type, std::size_t index);
         void update_view();
         void add_row(const Data::Row& row);
         void give_up();

@@ -79,8 +79,8 @@ body > div:last-child
     background-color: mintcream;
     border: calc(0.1 * var(--vw)) solid black;
     border-radius: calc(2 * var(--vw));
-    font-size: max(0.75em, calc(3 * var(--vw)));
-    width: calc(25 * var(--vw));
+    font-size: calc(3 * var(--vw));
+    width: calc(30 * var(--vw));
     min-width: 3em;
     box-shadow: 0pt 0pt calc(5 * var(--vw)) black;
 }
@@ -174,7 +174,7 @@ body > div:last-child
 
 .index
 {
-    width: max(1em, calc(8 * var(--vw)));
+    width: calc(8 * var(--vw));
     border-radius: calc(1 * var(--vw));
     border: calc(0.1 * var(--vw)) solid black;
     margin-right: calc(1 * var(--vw));
@@ -182,14 +182,14 @@ body > div:last-child
     margin-bottom: auto;
     padding-left: 0pt;
     padding-right: 0pt;
-    font-size: max(0.5em, calc(4 * var(--vw)));
+    font-size: calc(4 * var(--vw));
     background-color: gray;
     color: white;
 }
 
 #go
 {
-    font-size: max(0.75em, calc(3 * var(--vw)));
+    font-size: calc(3 * var(--vw));
     width: calc(16 * var(--vw));
     min-width: 2em;
     height: calc(8 * var(--vw));
@@ -204,9 +204,9 @@ body > div:last-child
     border: calc(0.15 * var(--vw)) solid black;
     border-radius: calc(1 * var(--vw));
     color: white;
-    font-size: max(1em, calc(3 * var(--vw)));
+    font-size: calc(3 * var(--vw));
     font-weight: bold;
-    width: max(6em, calc(24 * var(--vw)));
+    width: calc(24 * var(--vw));
     margin-left: auto;
     margin-right: auto;
 }
@@ -238,7 +238,7 @@ body > div:last-child
 
 .colored::before
 {
-    font-size: max(0.5em, calc(2 * var(--vw)));
+    font-size: calc(2 * var(--vw));
     margin: auto;
     display: block;
 }
@@ -253,20 +253,20 @@ body > div:last-child
 
 .bucket.colored::after
 {
-    width: max(1em, calc(11 * var(--vw)));
-    height: max(1em, calc(11 * var(--vw)));
+    width: calc(11 * var(--vw));
+    height: calc(11 * var(--vw));
 }
 
 .column.colored::after
 {
-    width: max(1em, calc(9 * var(--vw)));
-    height: max(1em, calc(9 * var(--vw)));
+    width: calc(9 * var(--vw));
+    height: calc(9 * var(--vw));
 }
 
 .score.colored::after
 {
-    width: max(0.5em, calc(5 * var(--vw)));
-    height: max(0.5em, calc(5 * var(--vw)));
+    width: calc(5 * var(--vw));
+    height: calc(5 * var(--vw));
 }
 
 .colored[data-color="empty"]::before

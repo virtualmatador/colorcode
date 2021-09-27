@@ -1,3 +1,43 @@
+var audios_= [];
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+const audioCtx = new AudioContext();
+
+function setup()
+{
+    var ids =
+    [
+        'c0', 'c1', 'c2', 'c3', 'c4', 'c5', 'e0', 'e1', 'n0', 'n10', 'n11', 'n12', 'n13', 'n14', 'n15', 'n16', 'n17', 'n18', 'n19', 'n1', 'n2', 'n3', 'n4', 'n5', 'n6', 'n7', 'n8', 'n9', 'p0', 'p1', 's0', 's1',
+    ];
+    var loaded = 0;
+    ids.forEach(function(id)
+    {
+        var request = new XMLHttpRequest();
+        request.open('GET', cross_asset_domain_ + 'wave/' + id + '.wav', cross_asset_async_);
+        request.responseType = 'arraybuffer';
+        request.onload = function()
+        {
+            var audioData = request.response;
+            audioCtx.decodeAudioData(audioData, function(buffer)
+            {
+                audios_[id] = buffer;
+                if (++loaded == ids.length)
+                {
+                    setTimeout(CallHandler, 0, 'body', 'setup', '');
+                }
+            });
+        };
+        request.send();
+    });
+}
+
+function playAudio(id)
+{
+    var source = audioCtx.createBufferSource();
+    source.buffer = audios_[id];
+    source.connect(audioCtx.destination);
+    source.start(0);
+}
+
 function setText(state)
 {
     vars = document.querySelector(":root");
@@ -67,16 +107,19 @@ function target(index)
 
 function newGame()
 {
+    more();
     CallHandler("game", "reset", "");
 }
 
 function stop()
 {
+    more();
     CallHandler("game", "stop", "");
 }
 
 function giveUp()
 {
+    more();
     CallHandler("game", "giveup", "");
 }
 
@@ -181,23 +224,15 @@ function gameOver(state)
     }
 }
 
-function more(hide)
+function more()
 {
     var options = document.getElementById("options");
-    if (hide || options.style.display == "block")
+    if (options.style.display == "block")
     {
         options.style.display = "none";
     }
     else
     {
         options.style.display = "block";
-    }
-}
-
-window.onclick = function(event)
-{
-    if (event.target != document.getElementById("more"))
-    {
-        more(true);
     }
 }

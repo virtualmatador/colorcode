@@ -14,6 +14,10 @@ main::Game::Game()
             return;
         else if (std::strcmp(command, "ready") == 0)
         {
+            bridge::CallFunction("setup();");
+        }
+        else if (std::strcmp(command, "setup") == 0)
+        {
             std::ostringstream js;
             js.str("");
             js.clear();
@@ -38,10 +42,7 @@ main::Game::Game()
                 js << "setTargetColor(" << data_.active_target_
                     << ", " << color << ");";
                 bridge::CallFunction(js.str().c_str());
-                if (data_.sound_)
-                {
-                    bridge::PlayAudio(20 + color);
-                }
+                play_audio('c', color);
             }
         }
     };
@@ -76,17 +77,11 @@ main::Game::Game()
                     js << "setTargetActive(" << data_.active_target_ << ");";
                     bridge::CallFunction(js.str().c_str());
                 }
-                if (data_.sound_)
-                {
-                    bridge::PlayAudio(active_target);
-                }
+                play_audio('n', active_target);
             }
             else if (data_.game_over_ == 2)
             {
-                if (data_.sound_)
-                {
-                    bridge::PlayAudio(20 + data_.target_colors_[active_target]);
-                }
+                play_audio('c', data_.target_colors_[active_target]);
             }
         }
     };
@@ -102,10 +97,7 @@ main::Game::Game()
         {
             if (data_.game_over_ == 0)
             {
-                if (data_.sound_)
-                {
-                    bridge::PlayAudio(31);
-                }
+                play_audio('e', 1);
             }
             data_.reset_game();
             update_view();
@@ -137,10 +129,7 @@ main::Game::Game()
                         }
                         data_.game_over_ = 1;
                         game_over();
-                        if (data_.sound_)
-                        {
-                            bridge::PlayAudio(30);
-                        }
+                        play_audio('e', 0);
                     }
                     else if (data_.rows_.size() == data_.rows_max_)
                     {
@@ -148,18 +137,12 @@ main::Game::Game()
                     }
                     else
                     {
-                        if (data_.sound_)
-                        {
-                            bridge::PlayAudio(29);
-                        }
+                        play_audio('p', 0);
                     }
                 }
                 else
                 {
-                    if (data_.sound_)
-                    {
-                        bridge::PlayAudio(28);
-                    }
+                    play_audio('p', 1);
                 }
             }
         }
@@ -180,10 +163,7 @@ main::Game::Game()
             std::istringstream is{ info };
             int row, column;
             is >> row >> column;
-            if (data_.sound_)
-            {
-                bridge::PlayAudio(20 + data_.rows_[row].first[column]);
-            }
+            play_audio('c', data_.rows_[row].first[column]);
         }
     };
     handlers_["score"] = [&](const char* command, const char* info)
@@ -197,17 +177,11 @@ main::Game::Game()
             is >> row >> column;
             if (column < data_.rows_[row].second[0])
             {
-                if (data_.sound_)
-                {
-                    bridge::PlayAudio(20 + 6 + 0);
-                }
+                play_audio('s', 0);
             }
             else if (column < data_.rows_[row].second[0] + data_.rows_[row].second[1])
             {
-                if (data_.sound_)
-                {
-                    bridge::PlayAudio(20 + 6 + 1);
-                }
+                play_audio('s', 1);
             }
         }
     };
@@ -220,17 +194,12 @@ main::Game::Game()
             std::istringstream is{ info };
             int index;
             is >> index;
-            if (data_.sound_)
-            {
-                bridge::PlayAudio(index);
-            }
+            play_audio('n', index);
         }
     };
-    bridge::LoadWebView(index_,
+    bridge::LoadView(index_,
         (std::int32_t)core::VIEW_INFO::Portrait |
-        (std::int32_t)core::VIEW_INFO::AudioNoSolo, "game",
-        "n0 n1 n2 n3 n4 n5 n6 n7 n8 n9 n10 n11 n12 n13 n14 n15 n16 n17 n18 n19"
-        " c0 c1 c2 c3 c4 c5 s0 s1 p0 p1 e0 e1");
+        (std::int32_t)core::VIEW_INFO::AudioNoSolo, "game");
 }
 
 main::Game::~Game()
@@ -241,6 +210,16 @@ void main::Game::Escape()
 {
     main::progress_ = PROGRESS::MENU;
     bridge::NeedRestart();
+}
+
+void main::Game::play_audio(const char type, std::size_t index)
+{
+    if (data_.sound_)
+    {
+        std::ostringstream js;
+        js << "playAudio('" << type << index << "');";
+        bridge::CallFunction(js.str().c_str());
+    }
 }
 
 void main::Game::update_view()
@@ -318,10 +297,7 @@ void main::Game::give_up()
     }
     data_.game_over_ = 2;
     game_over();
-    if (data_.sound_)
-    {
-        bridge::PlayAudio(31);
-    }
+    play_audio('e', 1);
 }
 
 void main::Game::game_over()
@@ -331,4 +307,9 @@ void main::Game::game_over()
     js.clear();
     js << "gameOver(" << data_.game_over_ << ");";
     bridge::CallFunction(js.str().c_str());
+}
+
+void main::Game::FeedUri(const char* uri, std::function<void(
+    const std::vector<unsigned char>&)>&& consume)
+{
 }
