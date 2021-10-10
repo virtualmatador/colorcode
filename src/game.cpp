@@ -247,10 +247,13 @@ void main::Game::update_view()
         js << "clearTargetActive(" << i << ");";
         bridge::CallFunction(js.str().c_str());
     }
-    js.str("");
-    js.clear();
-    js << "setTargetActive(" << data_.active_target_ << ");";
-    bridge::CallFunction(js.str().c_str());
+    if (data_.active_target_ < Data::targets_max_)
+    {
+        js.str("");
+        js.clear();
+        js << "setTargetActive(" << data_.active_target_ << ");";
+        bridge::CallFunction(js.str().c_str());
+    }
     bridge::CallFunction("clearRows();");
     for (const auto& row : data_.rows_)
     {
