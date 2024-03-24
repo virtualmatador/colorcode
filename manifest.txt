@@ -1,5 +1,5 @@
 target=ColorCode
 identifier=com.shaidin.colorcode
-version=1.9.25
+version=1.26.26
 internet=false
 guid=BF3A5768-90B4-49FE-986B-73C26433D2BA
