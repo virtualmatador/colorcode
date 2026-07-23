@@ -111,19 +111,19 @@ main::Game::Game()
                     auto scores = data_.calculate_scores();
                     data_.rows_.push_back(std::make_pair(data_.target_colors_, scores));
                     add_row(data_.rows_.back());
+                    for (std::size_t i = 0; i < Data::targets_max_; ++i)
+                    {
+                        data_.target_colors_[i] = Data::target_colors_max_;
+                        std::ostringstream js;
+                        js << "clearTargetColor(" << i << ");";
+                        bridge::CallFunction(js.str().c_str());
+                    }
                     if (scores[0] == Data::targets_max_)
                     {
                         data_.active_target_ = Data::targets_max_;
                         for (std::size_t i = 0; i < 4; ++i)
                         {
-                            data_.target_colors_[i] = Data::target_colors_max_;
                             std::ostringstream js;
-                            js.str("");
-                            js.clear();
-                            js << "clearTargetColor(" << i << ");";
-                            bridge::CallFunction(js.str().c_str());
-                            js.str("");
-                            js.clear();
                             js << "clearTargetActive(" << i << ");";
                             bridge::CallFunction(js.str().c_str());
                         }
