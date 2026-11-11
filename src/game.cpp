@@ -1,8 +1,6 @@
 #include <sstream>
 #include <cstring>
 
-#include "helper.h"
-
 #include "game.h"
 #include "progress.h"
 
@@ -197,9 +195,13 @@ main::Game::Game()
             play_audio('n', index);
         }
     };
-    bridge::LoadView(index_,
-        (std::int32_t)core::VIEW_INFO::Portrait |
-        (std::int32_t)core::VIEW_INFO::AudioNoSolo, "game");
+}
+
+void main::Game::Attach()
+{
+    bridge::SetAudioNoSolo(true);
+    bridge::SetLayout(true, false);
+    bridge::LoadView(Index(), "game");
 }
 
 main::Game::~Game()
@@ -209,7 +211,7 @@ main::Game::~Game()
 void main::Game::Escape()
 {
     main::progress_ = PROGRESS::MENU;
-    bridge::NeedRestart();
+    RequestStage();
 }
 
 void main::Game::play_audio(const char type, std::size_t index)

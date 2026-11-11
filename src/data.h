@@ -2,7 +2,7 @@
 #define SRC_DATA_H
 
 #include <array>
-#include <list>
+#include <iosfwd>
 #include <random>
 #include <vector>
 
@@ -23,8 +23,8 @@ namespace main
     public:
         Data();
         ~Data();
-        void load();
-        void save() const;
+        void load(std::istream& input);
+        void save(std::ostream& output) const;
         void reset_all();
         void reset_game();
 
@@ -33,6 +33,8 @@ namespace main
         std::array<int, 2> calculate_scores() const;
 
     private:
+        static constexpr int save_version_ = 1;
+        bool incompatible_save_ = false;
         bool show_text_;
         bool sound_;
         int game_over_;

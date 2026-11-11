@@ -1,6 +1,6 @@
 var audios_= [];
 const AudioContext = window.AudioContext || window.webkitAudioContext;
-const audioCtx = new AudioContext();
+var audioCtx;
 
 function setup()
 {
@@ -8,30 +8,53 @@ function setup()
     [
         'c0', 'c1', 'c2', 'c3', 'c4', 'c5', 'e0', 'e1', 'n0', 'n10', 'n11', 'n12', 'n13', 'n14', 'n15', 'n16', 'n17', 'n18', 'n19', 'n1', 'n2', 'n3', 'n4', 'n5', 'n6', 'n7', 'n8', 'n9', 'p0', 'p1', 's0', 's1',
     ];
-    var loaded = 0;
-    ids.forEach(function(id)
+    if (AudioContext)
     {
-        var request = new XMLHttpRequest();
-        request.open('GET', cross_asset_domain_ + 'wave/' + id + '.wav', cross_asset_async_);
-        request.responseType = 'arraybuffer';
-        request.onload = function()
+        audioCtx = new AudioContext();
+    }
+    var loads = ids.map(function(id)
+    {
+        if (!audioCtx)
         {
-            var audioData = request.response;
-            audioCtx.decodeAudioData(audioData, function(buffer)
+            return Promise.reject();
+        }
+        return new Promise(function(resolve, reject)
+        {
+            var request = new XMLHttpRequest();
+            request.open('GET', cross_asset_domain_ + 'wave/' + id + '.wav',
+                cross_asset_async_);
+            request.responseType = 'arraybuffer';
+            request.onload = function()
             {
-                audios_[id] = buffer;
-                if (++loaded == ids.length)
-                {
-                    setTimeout(CallHandler, 0, 'body', 'setup', '');
-                }
-            });
-        };
-        request.send();
+                audioCtx.decodeAudioData(
+                    request.response,
+                    function(buffer)
+                    {
+                        audios_[id] = buffer;
+                        resolve();
+                    },
+                    reject);
+            };
+            request.onerror = reject;
+            request.send();
+        });
+    });
+    Promise.allSettled(loads).then(function()
+    {
+        CallHandler('body', 'setup', '');
     });
 }
 
 function playAudio(id)
 {
+    if (!audioCtx || !audios_[id])
+    {
+        return;
+    }
+    if (audioCtx.state === 'suspended')
+    {
+        audioCtx.resume();
+    }
     var source = audioCtx.createBufferSource();
     source.buffer = audios_[id];
     source.connect(audioCtx.destination);

@@ -17,6 +17,7 @@ namespace main
             const std::vector<unsigned char>&)>&& consume) override;
 
     private:
+        void Attach() override;
         void play_audio(const char type, std::size_t index);
         void update_view();
         void add_row(const Data::Row& row);

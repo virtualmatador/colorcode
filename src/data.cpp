@@ -1,11 +1,8 @@
-#include <iostream>
-#include <sstream>
-
-#include "bridge.h"
+#include <istream>
+#include <ostream>
+#include <utility>
 
 #include "data.h"
-
-#include "toolbox.hpp"
 
 main::Data main::data_;
 
@@ -22,106 +19,101 @@ main::Data::~Data()
 {
 }
 
-void main::Data::load()
+void main::Data::load(std::istream& input)
 {
-    try
+    reset_all();
+    input >> std::dec >> std::noboolalpha >> std::skipws;
+    int version = 0;
+    if (!(input >> version))
+        return;
+    if (version != save_version_)
     {
-        toolbox::Load("OPTION_TEXT", show_text_, false, false);
-        toolbox::Load("OPTION_SOUND", sound_, false, false);
-        toolbox::Load("GAME_OVER", game_over_, 0, 3);
-        toolbox::Load("GAME_ACTIVE_TARGET", active_target_, 0, targets_max_ + 1);
-        if (active_target_ == targets_max_ && !game_over_)
-        {
-            throw "";
-        }
-        for (std::size_t i = 0; i < targets_max_; ++i)
-        {
-            std::ostringstream composer;
-            composer << "GAME_TARGET_COLOR_" << i;
-            toolbox::Load(composer.str().c_str(), target_colors_[i], 0,
-                target_colors_max_ + 1);
-        }
-        for (std::size_t i = 0; i < targets_max_; ++i)
-        {
-            std::ostringstream composer;
-            composer << "GAME_CHOOSEN_COLOR_" << i;
-            toolbox::Load(composer.str().c_str(), choosen_colors_[i], 0,
-                target_colors_max_);
-        }
-        int rows_size;
-        toolbox::Load("GAME_ROWS_SIZE", rows_size, 0, 1024);
-        rows_.clear();
-        for (std::size_t i = 0; i < rows_size; ++i)
-        {
-            Row row;
-            int total_score = 0;
-            for (std::size_t j = 0; j < row.first.size(); ++j)
-            {
-                std::ostringstream composer;
-                composer << "GAME_ROWS_" << i << "_COLOR_" << j;
-                toolbox::Load(composer.str().c_str(), row.first[j], 0, target_colors_max_);
-            }
-            for (std::size_t j = 0; j < row.second.size(); ++j)
-            {
-                std::ostringstream composer;
-                composer << "GAME_ROWS_" << i << "_SCORE_" << j;
-                toolbox::Load(composer.str().c_str(), row.second[j], 0, targets_max_ + 1);
-                total_score += row.second[j];
-            }
-            if (total_score < targets_max_ + 1)
-            {
-                rows_.emplace_back(row);
-            }
-            else
-            {
-                throw "";
-            }
-        }
+        incompatible_save_ = true;
+        return;
     }
-    catch(...)
+
+    Data loaded;
+    if (!(input >> loaded.show_text_ >> loaded.sound_
+                >> loaded.game_over_ >> loaded.active_target_) ||
+        loaded.game_over_ < 0 || loaded.game_over_ >= 3 ||
+        loaded.active_target_ < 0 || loaded.active_target_ > targets_max_ ||
+        (loaded.active_target_ == targets_max_ && !loaded.game_over_))
+        return;
+
+    for (auto& color : loaded.target_colors_)
     {
-        reset_all();
+        if (!(input >> color) || color < 0 || color > target_colors_max_)
+            return;
     }
+    for (auto& color : loaded.choosen_colors_)
+    {
+        if (!(input >> color) || color < 0 || color >= target_colors_max_)
+            return;
+    }
+
+    int rows_size = 0;
+    if (!(input >> rows_size) || rows_size < 0 || rows_size >= 1024)
+        return;
+    for (int i = 0; i < rows_size; ++i)
+    {
+        Row row;
+        for (auto& color : row.first)
+        {
+            if (!(input >> color) || color < 0 || color >= target_colors_max_)
+                return;
+        }
+        for (auto& score : row.second)
+        {
+            if (!(input >> score) || score < 0 || score > targets_max_)
+                return;
+        }
+        if (row.second[0] + row.second[1] > targets_max_)
+            return;
+        loaded.rows_.push_back(row);
+    }
+    input >> std::ws;
+    if (!input.eof() || input.bad())
+        return;
+
+    show_text_ = loaded.show_text_;
+    sound_ = loaded.sound_;
+    game_over_ = loaded.game_over_;
+    active_target_ = loaded.active_target_;
+    target_colors_ = loaded.target_colors_;
+    choosen_colors_ = loaded.choosen_colors_;
+    rows_ = std::move(loaded.rows_);
 }
 
-void main::Data::save() const
+void main::Data::save(std::ostream& output) const
 {
-    toolbox::Save("OPTION_TEXT", show_text_);
-    toolbox::Save("OPTION_SOUND", sound_);
-    toolbox::Save("GAME_OVER", game_over_);
-    toolbox::Save("GAME_ACTIVE_TARGET", active_target_);
-    for (std::size_t i = 0; i < targets_max_; ++i)
+    if (incompatible_save_)
     {
-        std::ostringstream composer;
-        composer << "GAME_TARGET_COLOR_" << i;
-        toolbox::Save(composer.str().c_str(), target_colors_[i]);
+        output.setstate(std::ios::failbit);
+        return;
     }
-    for (std::size_t i = 0; i < targets_max_; ++i)
+
+    output << std::dec << std::noboolalpha << std::noshowbase << std::noshowpos;
+    output.width(0);
+    output << save_version_ << '\n'
+           << show_text_ << ' ' << sound_ << ' '
+           << game_over_ << ' ' << active_target_ << '\n';
+    for (const auto color : target_colors_)
+        output << color << ' ';
+    output << '\n';
+    for (const auto color : choosen_colors_)
+        output << color << ' ';
+    output << '\n' << rows_.size() << '\n';
+    for (const auto& row : rows_)
     {
-        std::ostringstream composer;
-        composer << "GAME_CHOOSEN_COLOR_" << i;
-        toolbox::Save(composer.str().c_str(), choosen_colors_[i]);
-    }
-    toolbox::Save("GAME_ROWS_SIZE", (int)rows_.size());
-    for (std::size_t i = 0; i < rows_.size(); ++i)
-    {
-        for (std::size_t j = 0; j < rows_[i].first.size(); ++j)
-        {
-            std::ostringstream composer;
-            composer << "GAME_ROWS_" << i << "_COLOR_" << j;
-            toolbox::Save(composer.str().c_str(), rows_[i].first[j]);
-        }
-        for (std::size_t j = 0; j < rows_[i].second.size(); ++j)
-        {
-            std::ostringstream composer;
-            composer << "GAME_ROWS_" << i << "_SCORE_" << j;
-            toolbox::Save(composer.str().c_str(), rows_[i].second[j]);
-        }
+        for (const auto color : row.first)
+            output << color << ' ';
+        output << row.second[0] << ' ' << row.second[1] << '\n';
     }
 }
 
 void main::Data::reset_all()
 {
+    incompatible_save_ = false;
     show_text_ = false;
     sound_ = false;
     reset_game();

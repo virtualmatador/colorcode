@@ -14,8 +14,11 @@
         </div>
         <br>
         <div>
+            <p id="save-version-error" role="alert" hidden>
+                This version of ColorCode cannot read the saved game. Use Reset to start a new game.
+            </p>
             <div class="controls">
-                <button onclick="play()">Play</button>
+                <button id="play" onclick="play()">Play</button>
                 <br>
                 <input id="text" type="checkbox" onclick="text()"><label for="text">Text</label>
                 <br>
